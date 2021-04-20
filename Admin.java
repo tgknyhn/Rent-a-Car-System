@@ -4,6 +4,8 @@ public class Admin implements User {
 	private String name;
 	private String lastname;
 	private String id;
+	private String email;
+	private String password;
 
 
 	public Admin() {
@@ -13,32 +15,59 @@ public class Admin implements User {
 	public Admin(String name, String lastname, String id) {
 		setName(name);
 		setLastname(lastname);
-		setId(id);
+		setID(id);
 	}
 
+	@Override
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	@Override
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
 
-	public void setid(String id) {
-		this.id = id;
+	@Override
+	public void setEmail(String email) {
+	this.email = email;
 	}
 
+	@Override
+	public void setPassword(String password) {
+	this.password = password;
+	}
+
+	@Override
+	public void setID(String ID) {
+		this.id = ID;
+	}
+
+	@Override
+	public String getEmail() {
+		return email;
+	}
+
+	@Override
+	public String getPassword() {
+		return password;
+	}
+
+	@Override
 	public String getName() {
 		return this.name;
 	}
 
+	@Override
 	public String getLastname() {
 		return this.lastname;
 	}
 
-	public String getId() {
+	@Override
+	public String getID() {
 		return this.id;
 	}
+
 
 	public boolean addVehicle(ServiceBranch sBranch) {
 		System.out.println("Please choose the vehicle. \n"+
@@ -48,7 +77,7 @@ public class Admin implements User {
 		Scanner scan = new Scanner(System.in);
 		int choice = scan.nextInt();
 		if (choice < 1 || choice > 2) {
-			System.out.println("Invalid entry. Try again later.")
+			System.out.println("Invalid entry. Try again later.");
 			return false;
 		}
 		Vehicle vehicle;
@@ -64,7 +93,7 @@ public class Admin implements User {
 			"Choice: ");
 		choice = scan.nextInt();
 		if (choice < 1 || choice > 3) {
-			System.out.println("Invalid entry. Try again later.")
+			System.out.println("Invalid entry. Try again later.");
 			return false;
 		}
 		if (balance < vehicle.getPrice()) {
@@ -155,7 +184,7 @@ public class Admin implements User {
 		Scanner scan = new Scanner(System.in);
 		String name = scan.nextLine();
 		sm.setName(name);
-		sm.setId(createId('S', sManagers.size()));
+		sm.setID(createId('S', sManagers.size()));
 		sManagers.add(sm);
 
 		return true;
@@ -193,7 +222,7 @@ public class Admin implements User {
 		Scanner scan = new Scanner(System.in);
 		String name = scan.nextLine();
 		tp.setName(name);
-		tp.setId(createId('t', tPersonnel.size()));
+		tp.setID(createId('t', tPersonnel.size()));
 		tPersonnel.add(tp);
 
 		return true;
@@ -231,7 +260,7 @@ public class Admin implements User {
 		Scanner scan = new Scanner(System.in);
 		String name = scan.nextLine();
 		t.setName(name);
-		t.setId(createId('T', technicians.size()));
+		t.setID(createId('T', technicians.size()));
 		technicians.add(t);
 
 		return true;
