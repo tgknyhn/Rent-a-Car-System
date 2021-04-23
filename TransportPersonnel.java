@@ -28,8 +28,8 @@ public class TransportPersonnel implements User {
 		setName(name);
 		setLastname(lastname);
 		setID(ID);
-        setEmail(email);
-        setPassword(password);
+	setEmail(email);
+	setPassword(password);
 	}
     
     /**
