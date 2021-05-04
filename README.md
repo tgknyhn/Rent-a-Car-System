@@ -1,2 +1,2 @@
 # term-project
-This repository contains all code for Cse232 lecture's term project. 
+This repository contains all code for Cse222 lecture's term project. 
