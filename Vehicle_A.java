@@ -1,5 +1,5 @@
 public class Vehicle_A extends AbstractVehicle {
-    Vehicle_A() {
-        super("Vehicle A", "Brand", "A", "Placeholder description for A", 100000);
+    Vehicle_A(String brand, String color, String text, double price) {
+        super(brand, "A", color, text, price);
     }
 }
