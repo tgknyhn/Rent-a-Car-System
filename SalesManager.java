@@ -31,7 +31,7 @@ public class SalesManager implements User {
      * @param _email Email of the sales manager
      * @param _password Password of the sales manager
      */
-	public TransportPersonnel(String _name, String _lastname, String _ID, String _email, String _password, String _branchID) {
+	public SalesManager(String _name, String _lastname, String _ID, String _email, String _password, String _branchID) {
 		setName(_name);
 		setLastname(_lastname);
 		setID(_ID);
