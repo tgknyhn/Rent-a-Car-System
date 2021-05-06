@@ -189,24 +189,9 @@ public class Customer {
      * Prints out available vehicles with given parameters
      * @param vehicles Holds all vehicles available
      * @param model Model of the vehicle
-     * @param upperLimit Maximum price of the vehicle
-     * @param lowerLimit Minimum price of the vehicle
-     * @throws NullPointerException When vehicle list size is 0
      */
-    public void searchVehicles(PriorityQueue<Vehicle> vehicles, String model, int upperLimit, int lowerLimit) throws NullPointerException {
-        final int size = vehicles.size();
-
-        // throwing exception when size of vehicle list is 0
-        if(size == 0)
-            throw new NullPointerException();
-
-        // printing available vehicles with given parameters
-        for(int i=0, j=1; i<size; i++) {
-            if(vehicles.get(i).model.equals(model) && vehicles.get(i).price < upperLimit && vehicles.get(i).price > lowerLimit) {
-                System.out.println(j + ") " + vehicles.get(i));
-                j++;
-            }
-        }
+    public void searchVehicles(PriorityQueue<Vehicle> vehicles, String model) {
+        /* Search through every vehicle in the list, print out only given models. */
     }
 
     /**
@@ -216,17 +201,7 @@ public class Customer {
      * @throws NullPointerException When given parameter is null
      */
     public boolean rent(Vehicle vehicle) throws NullPointerException {
-        /* Sales manager decides whether customer can rent this vehicle or not
-        if(...)
-            return false;
-        */
-        // Checking if given parameter is null or not
-        if(vehicle == null)
-            throw new NullPointerException();
-        // Assigning rented car to Customer
-        myVehicle = vehicle;
-        // Removing rent price of the car from Customer's balance
-        remFromBalance(vehicle.getPrice());
+        /*  */
 
         return true;
     }
@@ -234,4 +209,6 @@ public class Customer {
     public void bringCarBack(ArrayList<RentalBranch> branches) {
         /* Returns car into branch and system sends this car to the technical branch */
     }
+
+
 }

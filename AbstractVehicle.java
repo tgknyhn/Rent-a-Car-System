@@ -11,8 +11,8 @@ public abstract class AbstractVehicle implements Vehicle {
     /**/
     private final  String[] vehicleParts = {"Motor","Far","Sasi","Fren Sistemi", "Camlar","Aksesuarlar"};
 	private final  int[] partsHealth = {100,100,100,100,100,100};
-    private finel int[] costRatioOfPiece = {0.4,0.02,0,1,0.05,0.06,0,07};
-    private final   int numberOfParts = 6;
+    private final  int[] costRatioOfPiece = {0.4,0.02,0,1,0.05,0.06,0,07};
+    private final  int numberOfParts = 6;
     /**/
     
     private int damage;

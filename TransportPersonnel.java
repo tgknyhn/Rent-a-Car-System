@@ -19,7 +19,7 @@ public class TransportPersonnel implements User {
     /**
      * Initializes transportation personnel.
      * @param name Name of the transportation personnel
-     * @param surname Surname of the transportation personnel
+     * @param lastname Surname of the transportation personnel
      * @param ID ID of the transportation personnel
      * @param email Email of the transportation personnel
      * @param password Password of the transportation personnel
@@ -28,8 +28,8 @@ public class TransportPersonnel implements User {
 		setName(name);
 		setLastname(lastname);
 		setID(ID);
-	setEmail(email);
-	setPassword(password);
+		setEmail(email);
+		setPassword(password);
 	}
     
     /**

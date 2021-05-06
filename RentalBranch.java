@@ -1,35 +1,43 @@
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
-public class RentalBranch {
-    // branch information
+public class RentalBranch implements Branch {
+    // Branch information
     private String branchName;
-    // vehicles
+
+    // Vehicles
     private ArrayList<Vehicle> vehicles;
-    private PriorityQueue<Vehicle> selectedVehicles;
 
-
-    public RentalBranch(String name, ArrayList<Vehicle> vehicles) {
-        setName(name);
-        this.vehicles = vehicles;
+    public RentalBranch(String branchName) {
+        this.branchName = branchName;
     }
 
-    // getters
+    @Override
     public String getName() { return branchName; }
 
-    public ArrayList<Vehicle> getVehicles() { return vehicles; }
-
-    public PriorityQueue<Vehicle> getSelectedVehicles(String model) { /* change it with model */ return selectedVehicles; }
-
-    // setters
+    @Override
     public void setName(String name) { branchName = name; }
 
-    public void addVehicle(Vehicle newVehicle) { /*  */ }
+    @Override
+    public ArrayList<Vehicle> getVehicles() { return vehicles; }
 
-    public void removeVehicle(int selectedVehicle) { /* */ }
+    @Override
+    public void addVehicle(Vehicle vehicle) { vehicles.add(vehicle); }
 
-    public void listVehicles(String model) { /*  */ }
+    @Override
+    public void removeVehicle(Vehicle vehicle) {
+        try {
+            vehicles.remove(vehicle);
+        } catch (Exception e) {
+            System.out.println("\n**Error! The vehicle you're trying to remove doesn't exist.**");
+        }
+    }
 
+    @Override
+    public void listVehicles(String model) {
+        int size = vehicles.size();
 
-
+        for(int i=0, j=1; i<size; i++, j++)
+            System.out.println(j + ")" + vehicles.get(i));
+    }
 }
