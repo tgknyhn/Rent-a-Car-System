@@ -1,17 +1,27 @@
-
 public interface Vehicle {
-	public int getDamage();
-	public int getStock();
-	public int getPrice();
-	public int getColor();
-	public String getModel();
-	public boolean available();
-	
-	public void setDamage(int a);
-	public void setStock(int a);
-	public void setPrice(int a);
-	public void setColor(int a);
-	public void setModel(int a);
-	public void setAvailable();
-	
+    int getDamage();
+    //int getStock();
+
+    double getPrice();
+    double getDiscountPercent();
+    double getDiscountedPrice();
+    double getScore();
+
+    String getModel();
+    String getBrand();
+    String getDescription();
+    String getColor();
+
+    boolean isAvailable();
+
+    void giveScore(int score);
+
+    void setDamage(int damage);
+    void setPrice(double price);
+    void setDescription(String description);
+    void setDiscountPercent(double discountPercent);
+    void setAvailable();
+    /*void setColor(String color);
+    void setModel(String model);
+    void setStock(int a);*/
 }
