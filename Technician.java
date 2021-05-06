@@ -19,7 +19,7 @@ public class Technician implements User {
     /**
      * Initializes transportation personnel.
      * @param name Name of the transportation personnel
-     * @param surname Surname of the transportation personnel
+     * @param lastname Surname of the transportation personnel
      * @param ID ID of the transportation personnel
      * @param email Email of the transportation personnel
      * @param password Password of the transportation personnel
@@ -28,8 +28,8 @@ public class Technician implements User {
 		setName(name);
 		setLastname(lastname);
 		setID(ID);
-	setEmail(email);
-	setPassword(password);
+		setEmail(email);
+		setPassword(password);
 	}
     
     /**
@@ -126,6 +126,8 @@ public class Technician implements User {
 		/*vehicle clası içersinde araç parçarları olursa(motor far şanzıman kaporta)
 		bu parçaları. araç kaza yapma methoduyla çağırıp belli bir yüzdelik ile hasar verebilir 
 		Technician içersinde tutulan fiyat listesinden bu parçaların fiyatı çıkartılıp fatura kesilebilir.*/
+
+		return 0;
 	}
 
 	/**
@@ -134,6 +136,7 @@ public class Technician implements User {
 	 */	
 	public boolean repairTheDamagedVehicle (Vehicle vehicle) {
 		/*hasar miktarını ölcerek belli bir yüzdeliğe göre aracın tamir edilip edilemeyeceğini return eder*/
+		return true;
 	}
 
 	/**
@@ -142,6 +145,8 @@ public class Technician implements User {
 	 */
 	public int maintenanceVehilcle(Vehicle vehicle){
 		/*aracın türüne göre periodik bakımının kontrolu.*/
+
+		return 0;
 	}
 
 

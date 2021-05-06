@@ -10,14 +10,28 @@ public class Admin implements User {
 	private String password;
 
 
-	public Admin() {
-
+	public Admin(){
+		setName("empty");
+		setLastname("empty");
+		setID("empty");
+		setEmail("empty");
+		setPassword("empty");
 	}
 
-	public Admin(String name, String lastname, String id) {
+	/**
+	 * Initializes transportation personnel.
+	 * @param name Name of the transportation personnel
+	 * @param lastname Surname of the transportation personnel
+	 * @param ID ID of the transportation personnel
+	 * @param email Email of the transportation personnel
+	 * @param password Password of the transportation personnel
+	 */
+	public Admin(String name, String lastname, String ID, String email, String password) {
 		setName(name);
 		setLastname(lastname);
-		setID(id);
+		setID(ID);
+		setEmail(email);
+		setPassword(password);
 	}
 
 	@Override
@@ -84,7 +98,7 @@ public class Admin implements User {
 		}
 		Vehicle vehicle;
 		if (choice == 1) {
-			vehicle = new Car();
+			vehicle = new Vehicle();
 		}
 		else
 			vehicle = new Bike();
@@ -194,7 +208,7 @@ public class Admin implements User {
 
 	public boolean removeSalesManager(ArrayList<SalesManager> sManagers) {
 		if (sManagers.size() == 0) {
-			System.out.println("There is no sales manager in the company.");
+			System.out.println("There is no sales manager in the System.");
 			return false;
 		}
 
@@ -232,7 +246,7 @@ public class Admin implements User {
 
 	public boolean removeTransportPersonnel(ArrayList<TransportPersonnel> tPersonnel) {
 		if (tPersonnel.size() == 0) {
-			System.out.println("There is no transport personnel in the company.");
+			System.out.println("There is no transport personnel in the System.");
 			return false;
 		}
 
@@ -270,7 +284,7 @@ public class Admin implements User {
 
 	public boolean removeTechnician(ArrayList<Technician> technicians) {
 		if (technicians.size() == 0) {
-			System.out.println("There is no technician in the company.");
+			System.out.println("There is no technician in the System.");
 			return false;
 		}
 

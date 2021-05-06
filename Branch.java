@@ -1,39 +1,31 @@
 import java.util.ArrayList;
 
-public interface Branch {
+public class Branch {
+    // Branch information
+    private String branchID;
 
-    /**
-     * Returns name of the Branch
-     * @return Name of the branch
-     */
-    String getName();
+    public Branch(String branchID) {
+        this.branchID = branchID;
+    }
 
-    /**
-     * Changes branch name with given parameter
-     */
-    void setName(String name);
+    public String getID() { return branchID; }
 
-    /**
-     * Returns vehicle array which holds all vehicles in the branch
-     * @return All vehicles in the branch
-     */
-    ArrayList<Vehicle> getVehicles();
+    public void setID(String name) { branchID = name; }
 
-    /**
-     * Adds given vehicle to the Branch
-     * @param vehicle Vehicle that will be added to the Branch
-     */
-    void addVehicle(Vehicle vehicle);
+    public void addVehicle(Company company, Vehicle vehicle) { company.getVehicles().add(vehicle); }
 
-    /**
-     * Removes given vehicle from the Branch
-     * @param vehicle Vehicle that will be removed from the Branch
-     */
-    void removeVehicle(Vehicle vehicle);
+    public void removeVehicle(Company company, Vehicle vehicle) {
+        try {
+            company.getVehicles().remove(vehicle);
+        } catch (Exception e) {
+            System.out.println("\n**Error! The vehicle you're trying to remove doesn't exist.**");
+        }
+    }
 
-    /**
-     * Prints out all vehicles in given model
-     * @param model Model type that will be printed
-     */
-    void listVehicles(String model);
+    public void listVehicles(Company company, String model) {
+        int size = company.getVehicles().size();
+        // if statement branch id kontrol et eşitse yazdır
+        for(int i=0, j=1; i<size; i++, j++)
+            System.out.println(j + ")" + company.getVehicles().get(i));
+    }
 }

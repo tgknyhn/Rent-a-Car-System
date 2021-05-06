@@ -1,4 +1,6 @@
 public interface User {
+
+
     String getID();
     void setID(String ID);
 
@@ -14,11 +16,5 @@ public interface User {
     String getPassword();
     void setPassword(String password);
 
-/*    int getAge();
-    void setAge(int age);
-
-    String getCity();
-    void setCity(String city);
-*/
 
 }

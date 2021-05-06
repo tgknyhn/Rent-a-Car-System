@@ -1,44 +1,16 @@
 import java.util.ArrayList;
 import java.util.PriorityQueue;
+import java.util.Queue;
 
-public class ServiceBranch implements Branch {
-    // Branch information
-    private String branchName;
+public class ServiceBranch extends Branch {
 
-    // Vehicles
-    private ArrayList<Vehicle> vehicles;
+    private Queue<Vehicle> vehiclesInService;
 
     public ServiceBranch(String branchName) {
-        this.branchName = branchName;
+        super(branchName);
     }
 
-    @Override
-    public String getName() { return branchName; }
+    public Queue<Vehicle> getVehiclesInService() { return vehiclesInService; }
 
-    @Override
-    public void setName(String name) { branchName = name; }
-
-    @Override
-    public ArrayList<Vehicle> getVehicles() { return vehicles; }
-
-    @Override
-    public void addVehicle(Vehicle vehicle) { vehicles.add(vehicle); }
-
-    @Override
-    public void removeVehicle(Vehicle vehicle) {
-        try {
-            vehicles.remove(vehicle);
-        } catch (Exception e) {
-            System.out.println("\n**Error! The vehicle you're trying to remove doesn't exist.**");
-        }
-    }
-
-    @Override
-    public void listVehicles(String model) {
-        int size = vehicles.size();
-
-        for(int i=0, j=1; i<size; i++, j++)
-            System.out.println(j + ")" + vehicles.get(i));
-    }
 
 }

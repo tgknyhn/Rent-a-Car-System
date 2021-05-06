@@ -29,7 +29,7 @@ public class SalesManager implements User {
     /**
      * Initializes transportation personnel.
      * @param _name Name of the sales manager
-     * @param _surname Surname of the sales manager
+     * @param _lastname Surname of the sales manager
      * @param _ID ID of the sales manager
      * @param _email Email of the sales manager
      * @param _password Password of the sales manager
@@ -130,11 +130,10 @@ public class SalesManager implements User {
     
     /**
      * Changes branchID of the sales manager
-     * @param _branchID
      */
 	@Override
-	public void setPassword(String _password) {
-	this.branchID = _branchID;
+	public void setBranchID(String branchID) {
+	this.branchID = branchID;
 	}
     
     /**
@@ -144,18 +143,19 @@ public class SalesManager implements User {
 	public String getBranchID() {
 		return branchID;
 	}
-	
+
+
 	/**
      * Checks, is there any available specific vehicle in that specific rental branch or not.
 	 * @param vehicles All vehicles available or rented in the branch. 
      * @param theModel The specific vehicle model which asked by user.
 	 * @return Returns index of available vehicle in vehicles list otherwise returns -1
 	 */
-	public Integer availableVehicle(ArrayList<Vehicle> vehicles, String theModel) {
+	public Integer isVehicleAvailable(ArrayList<Vehicle> vehicles, String theModel) {
 		int size = vehicles.size();
 		
 		if(size == 0) {
-			System.out.println("There is no vehicles!");
+			Company.out.println("There is no vehicles!");
 			return -1;
 		}
         
@@ -168,7 +168,27 @@ public class SalesManager implements User {
 		}
 		return -1;
 	}
-    
+
+	/**
+	 *
+	 * @param rentalBranches
+	 * @param vehicle
+	 * @throws NullPointerException
+	 */
+	public void fillPriority(ArrayList<RentalBranch> rentalBranches, Vehicle vehicle) throws NullPointerException {
+		for (RentalBranch rentalBranch : rentalBranches)
+			if (rentalBranch.getID().equals(getBranchID()))
+				rentalBranch.addWithPriority(vehicle);
+	}
+
+	/**
+	 *
+	 * @param vehicles
+	 */
+	public void availableVehicles(ArrayList<Vehicle> vehicles) {
+		/* Shows available vehicles with their priority(Priority Queue) */
+	}
+
 	public boolean addCustomer(ArrayList<Customer> theCustomer) {
 		if (theCustomer.size() == MAX_EMP_SIZE) {
 			// need to change size&cap.
@@ -180,23 +200,23 @@ public class SalesManager implements User {
 
 		Customer cus = new Customer();
         
-		System.out.println("Type the name of customer.");
-		Scanner scan = new Scanner(System.in);
+		Company.out.println("Type the name of customer.");
+		Scanner scan = new Scanner(Company.in);
 		String name = scan.nextLine();
 		cus.setName(name);
         
-        System.out.println("Type the surname of customer.");
-		Scanner scan = new Scanner(System.in);
+        Company.out.println("Type the surname of customer.");
+		Scanner scan = new Scanner(Company.in);
 		String surname = scan.nextLine();
 		cus.setSurname(surname);
         
-        System.out.println("Type the address of customer.");
-		Scanner scan = new Scanner(System.in);
+        Company.out.println("Type the address of customer.");
+		Scanner scan = new Scanner(Company.in);
 		String address = scan.nextLine();
 		cus.setAddress(address);
         
-        System.out.println("Type the phone number of customer.");
-		Scanner scan = new Scanner(System.in);
+        Company.out.println("Type the phone number of customer.");
+		Scanner scan = new Scanner(Company.in);
 		String phone = scan.nextLine();
 		cus.setPhone(phone);
         
@@ -213,18 +233,18 @@ public class SalesManager implements User {
     
     public boolean removeCustomer(ArrayList<Customer> theCustomer) {
 		if (theCustomer.size() == 0) {
-			System.out.println("There is no customer in the company.");
+			Company.out.println("There is no customer in the company.");
 			return false;
 		}
 
 		for (int i = 0; i<theCustomer.size(); i++) {
-			System.out.printf("%d. %s\n", i+1, theCustomer.get(i).getName());
+			Company.out.printf("%d. %s\n", i+1, theCustomer.get(i).getName());
 		}
         
-		Scanner scan = new Scanner(System.in);
+		Scanner scan = new Scanner(Company.in);
 		int choice = scan.nextInt();
 		if (choice<0 || choice>theCustomer.size()) {
-			System.out.println("Invalid entry.");
+			Company.out.println("Invalid entry.");
 			return false;
 		}
 		theCustomer.remove(choice);
@@ -234,12 +254,12 @@ public class SalesManager implements User {
     
     public boolean updateCustomer(Customer aCustomer) {
 		if (aCustomer.getName() == "empty") {
-			System.out.println("There is no customer in the company.");
+			Company.out.println("There is no customer in the company.");
 			return false;
 		}
         
-        System.out.println("If the name will change, type the new name. Otherwise write -1.");
-		Scanner scan = new Scanner(System.in);
+        Company.out.println("If the name will change, type the new name. Otherwise write -1.");
+		Scanner scan = new Scanner(Company.in);
 		String name = scan.nextLine();
         if(name == "-1"){
             // do nothing.
@@ -247,8 +267,8 @@ public class SalesManager implements User {
             cus.setName(name);
         }
         
-        System.out.println("If the surname will change, type the new surname. Otherwise write -1.");
-		Scanner scan = new Scanner(System.in);
+        Company.out.println("If the surname will change, type the new surname. Otherwise write -1.");
+		Scanner scan = new Scanner(Company.in);
 		String surname = scan.nextLine();
         if(surname == "-1"){
             // do nothing.
@@ -256,8 +276,8 @@ public class SalesManager implements User {
             cus.setSurname(surname);
         }
         
-        System.out.println("If the address will change, type the new address. Otherwise write -1.");
-		Scanner scan = new Scanner(System.in);
+        Company.out.println("If the address will change, type the new address. Otherwise write -1.");
+		Scanner scan = new Scanner(Company.in);
 		String address = scan.nextLine();
         if(address == "-1"){
             // do nothing.
@@ -265,8 +285,8 @@ public class SalesManager implements User {
             cus.setAddress(address);
         }
         
-        System.out.println("If the phone will change, type the new phone. Otherwise write -1.");
-		Scanner scan = new Scanner(System.in);
+        Company.out.println("If the phone will change, type the new phone. Otherwise write -1.");
+		Scanner scan = new Scanner(Company.in);
 		String phone = scan.nextLine();
         if(phone == "-1"){
             // do nothing.
@@ -274,8 +294,8 @@ public class SalesManager implements User {
             cus.setPhone(phone);
         }
         
-        System.out.println("If the score will change, type the new score. Otherwise write -1.");
-		Scanner scan = new Scanner(System.in);
+        Company.out.println("If the score will change, type the new score. Otherwise write -1.");
+		Scanner scan = new Scanner(Company.in);
 		String score = scan.nextLine();
         if(score == "-1"){
             // do nothing.
@@ -283,8 +303,8 @@ public class SalesManager implements User {
             cus.setScore(score);
         }
         
-        System.out.println("If the balance will change, type the new balance. Otherwise write -1.");
-		Scanner scan = new Scanner(System.in);
+        Company.out.println("If the balance will change, type the new balance. Otherwise write -1.");
+		Scanner scan = new Scanner(Company.in);
 		String balance = scan.nextLine();
         if(balance == "-1"){
             // do nothing.
@@ -292,18 +312,18 @@ public class SalesManager implements User {
             cus.setBalance(balance);
         }
         
-        System.out.println("Sales manager can't change the unique ID.");
+        Company.out.println("Sales manager can't change the unique ID.");
 
 		return true;
 	}
     
-    public boolean rent(Vehicle vehicle, Custome theCustomer) throws NullPointerException {
-        System.out.println("Please enter the type of the vehicle.");
-		Scanner scan = new Scanner(System.in);
+    public boolean rent(Vehicle vehicle, Customer theCustomer) throws NullPointerException {
+        Company.out.println("Please enter the type of the vehicle.");
+		Scanner scan = new Scanner(Company.in);
 		String vehicleType = scan.nextLine();
-        if( (availableVehicle(ArrayList<Vehicle> vehicles, String vehicleType)) == -1 ){
-            return false;
-        )
+        if( (availableVehicle(ArrayList<Vehicle> vehicles, String vehicleType)) == -1 ) {
+			return false;
+		}
         // Checking if given parameter is null or not
         if(vehicle == null)
             throw new NullPointerException();
@@ -316,3 +336,19 @@ public class SalesManager implements User {
 
         return true;
     }
+
+	public String createId(char code, int size) {
+		String id = "";
+		if (code == 't') //To seperate T with TP.
+			id += "TP";
+		else
+			id += code;
+
+		for (i = 1; i < 3; i++) { //This loop for add '0' to id if digit is small.
+			if (size+1 < Math.pow(10, 3-i))
+				id += "0";
+		}
+		id += Integer.toString(size+1);
+		return id;
+	}
+}

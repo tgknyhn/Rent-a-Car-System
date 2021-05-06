@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
-public class Customer {
+public class Customer implements Comparable<Customer> {
     // Bounds for score
     private final int MAX_SCORE = 100;
     private final int MIN_SCORE = -100;
@@ -13,6 +13,8 @@ public class Customer {
     private int phone;
     private int score;
     private int balance;
+    private int ID;
+    private boolean license;
     // Vehicle information
     private Vehicle myVehicle;
 
@@ -28,6 +30,8 @@ public class Customer {
         setPhone(0);
         setScore(0);
         setBalance(0);
+        setID(0);
+        setLicense(false);
     }
 
     /**
@@ -37,14 +41,17 @@ public class Customer {
      * @param address Address of the customer
      * @param phone Phone number of the customer
      * @param score Score of the customer
+     * @param ID ID of the customer
      */
-    public Customer(String name, String surname, String address, int phone, int score, int balance) {
+    public Customer(String name, String surname, String address, int phone, int score, int balance, int ID, boolean license) {
         setName(name);
         setSurname(surname);
         setAddress(address);
         setPhone(phone);
         setScore(score);
         setBalance(balance);
+        setID(ID);
+        setLicense(license);
     }
 
     /* [Getters] */
@@ -97,6 +104,18 @@ public class Customer {
         return balance;
     }
 
+    /**
+     * Returns ID of the customer
+     * @return ID of the customer
+     */
+    public int getID() { return ID; }
+
+    /**
+     *
+     * @return
+     */
+    public boolean getLicense() { return license; }
+
     /* [Setters] */
 
     /**
@@ -147,6 +166,18 @@ public class Customer {
         this.balance = balance;
     }
 
+    /**
+     * Changes ID of the customer with given parameter
+     * @param ID New ID of the customer
+     */
+    public void setID(int ID) { this.ID = ID; }
+
+    /**
+     *
+     * @param license
+     */
+    public void setLicense(boolean license) { this.license = license; }
+
     /* [Score Methods] */
 
     public void addToScore(int value) {
@@ -190,17 +221,17 @@ public class Customer {
      * @param vehicles Holds all vehicles available
      * @param model Model of the vehicle
      */
-    public void searchVehicles(PriorityQueue<Vehicle> vehicles, String model) {
+    public void searchVehicles(ArrayList<Vehicle> vehicles, String model) {
         /* Search through every vehicle in the list, print out only given models. */
     }
 
     /**
-     * Rents the car for the customer if employee decides that everything is present by the customer.
+     *
      * @param vehicle Vehicle that customer wants to rent
      * @return Returns true if renting is successful
      * @throws NullPointerException When given parameter is null
      */
-    public boolean rent(Vehicle vehicle) throws NullPointerException {
+    public boolean rentRequest(Vehicle vehicle) throws NullPointerException {
         /*  */
 
         return true;
@@ -210,5 +241,13 @@ public class Customer {
         /* Returns car into branch and system sends this car to the technical branch */
     }
 
-
+    @Override
+    public int compareTo(Customer o) {
+        if(this.ID > o.getID())
+            return 1;
+        else if(this.ID == o.getID())
+            return 0;
+        else
+            return -1;
+    }
 }

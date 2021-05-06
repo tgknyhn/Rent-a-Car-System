@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Queue;
 
 public class TransportPersonnel implements User {
 
@@ -116,51 +117,16 @@ public class TransportPersonnel implements User {
 	public void setPassword(String password) {
 	this.password = password;
 	}
-	
-	/**
-	 * @param vehicles
-	 * @param vehicle
-	 * @return Returns index of searched vehicle in vehicles list if it exists
-	 */
-	public Integer indexOfVehicle(ArrayList<Vehicle> vehicles, Vehicle vehicle) {
-		int size = vehicles.size();
-		
-		if(size == 0) {
-			System.out.println("There is no vehicles!");
-			return -1;
-		}
-		
-		for(int i = 0 ; i < size ; i++) {
-			Vehicle currentVehicle = vehicles.get(i);
-			
-			if(currentVehicle.getModel().equals(vehicle.getModel()) && currentVehicle.getColor() == vehicle.getColor()) {
-				return i;
-			}
-		}
-		return -1;
-	}
+
 	/**
 	 * Transports the maintained vehicle from service branch to the rental branch. 
 	 * @param service Service Branch
 	 * @param rental Rental Branch
-	 * @param vehicle
 	 * @return Returns true if transportation is successfull
 	 */
-	public boolean transportServiceToRental(ServiceBranch service, RentalBranch rental, Vehicle vehicle) {
-		int vehicleIndex = indexOfVehicle(service.getVehicles(), vehicle);
-		
-		if(vehicleIndex == -1) {
-			System.out.println("Invalid vehicle!");
-			return false;
-		}
-		
-		if(vehicle.getDamage() > 0) {
-			System.out.println("Vehicle is still damaged!");
-			return false;
-		}
-		service.removeVehicle(vehicleIndex);
-		rental.addVehicle(vehicleIndex);
-		
+	public boolean transportServiceToRental(ServiceBranch service, RentalBranch rental) {
+		/* From queue(remove) to arraylist(add) */
+
 		return true;
 	}
 	
@@ -168,41 +134,25 @@ public class TransportPersonnel implements User {
 	 * Transports the vehicle from rental branch to the service branch for maintenance.
 	 * @param rental Rental Branch
 	 * @param service Service Branch
-	 * @param vehicle
 	 * @return Returns true if transportation is successfull
 	 */
-	public boolean transportRentalToService(RentalBranch rental, ServiceBranch service, Vehicle vehicle) {
-		int vehicleIndex = indexOfVehicle(rental.getVehicles(), vehicle);
-		
-		if(vehicleIndex == -1) {
-			System.out.println("Invalid vehicle!");
-			return false;
-		}
-	
-		rental.removeVehicle(vehicleIndex);
-		service.addVehicle(vehicleIndex);
-		
+	public boolean transportRentalToService(RentalBranch rental, ServiceBranch service) {
+		/* From arraylist(remove) to queue(add) */
+
 		return true;
 	}
 	/**
 	 * @param fromRental Rental Branch
 	 * @param toRental Rental Branch
-	 * @param vehicle
 	 * @return Returns true if transportation is successfull
 	 */
-	public boolean transportRentalToRental(RentalBranch fromRental, RentalBranch toRental, Vehicle vehicle) {
-		int vehicleIndex = indexOfVehicle(fromRental.getVehicles(), vehicle);
-		
-		if(vehicleIndex == -1) {
-			System.out.println("Invalid vehicle!");
-			return false;
-		}
-		
-		fromRental.removeVehicle(vehicleIndex);
-		toRental.addVehicle(vehicleIndex);
-		
-		return true;	
+	public boolean transportRentalToRental(RentalBranch fromRental, RentalBranch toRental) {
+		/* From arraylist(remove) to arraylist(add) */
+
+		return true;
 	}
+
+
 
 }	
 
