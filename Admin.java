@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Admin implements User {
 	private final int MAX_EMP_SIZE = 1000;
 	private String name;
