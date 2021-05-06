@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 public class Customer {
     // Bounds for score
@@ -192,7 +193,7 @@ public class Customer {
      * @param lowerLimit Minimum price of the vehicle
      * @throws NullPointerException When vehicle list size is 0
      */
-    public void searchVehicles(ArrayList<Vehicle> vehicles, String model, int upperLimit, int lowerLimit) throws NullPointerException {
+    public void searchVehicles(PriorityQueue<Vehicle> vehicles, String model, int upperLimit, int lowerLimit) throws NullPointerException {
         final int size = vehicles.size();
 
         // throwing exception when size of vehicle list is 0
@@ -229,17 +230,8 @@ public class Customer {
 
         return true;
     }
-}
 
-class Vehicle {
-    protected String model;
-    protected int price;
-
-    public String getModel() {
-        return model;
-    }
-
-    public int getPrice() {
-        return price;
+    public void bringCarBack(ArrayList<RentalBranch> branches) {
+        /* Returns car into branch and system sends this car to the technical branch */
     }
 }
