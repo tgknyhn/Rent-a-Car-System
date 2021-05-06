@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Technician implements User {
-
+/**/
 	private String name;
 	private String lastname;
 	private String ID;
