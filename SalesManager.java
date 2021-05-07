@@ -46,7 +46,6 @@ public class SalesManager implements User {
     /**
      * @return Name of the sales manager
      */
-    @Override
 	public String getName() {
 		return this.name;
 	}
@@ -54,7 +53,6 @@ public class SalesManager implements User {
     /**
      * @return Last name of the sales manager
      */
-    @Override
 	public String getLastname() {
 		return this.lastname;
 	}
@@ -131,7 +129,6 @@ public class SalesManager implements User {
     /**
      * Changes branchID of the sales manager
      */
-	@Override
 	public void setBranchID(String branchID) {
 	this.branchID = branchID;
 	}
@@ -139,7 +136,6 @@ public class SalesManager implements User {
     /**
 	 * @return branchID of the sales manager
 	 */
-	@Override
 	public String getBranchID() {
 		return branchID;
 	}
@@ -147,25 +143,26 @@ public class SalesManager implements User {
 
 	/**
      * Checks, is there any available specific vehicle in that specific rental branch or not.
-	 * @param vehicles All vehicles available or rented in the branch. 
+	 * @param company Check vehicle list from company
      * @param theModel The specific vehicle model which asked by user.
 	 * @return Returns index of available vehicle in vehicles list otherwise returns -1
 	 */
-	public Integer isVehicleAvailable(ArrayList<Vehicle> vehicles, String theModel) {
-		int size = vehicles.size();
+	public Integer isVehicleAvailable(Company company, String theModel) {
+		int size = company.getVehicles().size();
 		
 		if(size == 0) {
-			Company.out.println("There is no vehicles!");
+			System.out.println("There is no vehicles!");
 			return -1;
 		}
-        
-		for(int i = 0 ; i < size ; i++) {
-			Vehicle currentVehicle = vehicles.get(i);
+
+		// company'deki vehicle listesinde tüm vehicellar burada tek tek check edilmedi.
+		/**for(int i = 0 ; i < size ; i++) {
+			Vehicle currentVehicle = company.getVehicles(i).get(i);
 			
 			if(currentVehicle.getModel().equals(theModel) && currentVehicle.available() == true) {
 				return i;
 			}
-		}
+		}*/
 		return -1;
 	}
 
@@ -176,9 +173,11 @@ public class SalesManager implements User {
 	 * @throws NullPointerException
 	 */
 	public void fillPriority(ArrayList<RentalBranch> rentalBranches, Vehicle vehicle) throws NullPointerException {
+		/*
+		//rentalBranch. ile direk işlem yapılmıyor
 		for (RentalBranch rentalBranch : rentalBranches)
 			if (rentalBranch.getID().equals(getBranchID()))
-				rentalBranch.addWithPriority(vehicle);
+				rentalBranch.addWithPriority(vehicle); */
 	}
 
 	/**
@@ -200,130 +199,147 @@ public class SalesManager implements User {
 
 		Customer cus = new Customer();
         
-		Company.out.println("Type the name of customer.");
-		Scanner scan = new Scanner(Company.in);
+		System.out.println("Type the name of customer.");
+		Scanner scan = new Scanner(System.in);
 		String name = scan.nextLine();
 		cus.setName(name);
-        
-        Company.out.println("Type the surname of customer.");
-		Scanner scan = new Scanner(Company.in);
+
+		System.out.println("Type the surname of customer.");
+		scan = new Scanner(System.in);
 		String surname = scan.nextLine();
 		cus.setSurname(surname);
-        
-        Company.out.println("Type the address of customer.");
-		Scanner scan = new Scanner(Company.in);
+
+		System.out.println("Type the address of customer.");
+		scan = new Scanner(System.in);
 		String address = scan.nextLine();
 		cus.setAddress(address);
-        
-        Company.out.println("Type the phone number of customer.");
-		Scanner scan = new Scanner(Company.in);
+
+		System.out.println("Type the phone number of customer.");
+		scan = new Scanner(System.in);
 		String phone = scan.nextLine();
-		cus.setPhone(phone);
+		cus.setPhone(Integer.parseInt(phone));
         
         // score & balance to 0 for first time.
         cus.setScore(0);
         cus.setBalance(0);
         // need to create unique id.
-		cus.setID("test");
-        
+		cus.setID(-1);
+
+		/*
+		bilgilerini topladığımız cus, theCustomer listesine yeni obje olarak
+			eklenmeli. Customer listesini company'den almamız gerekiyor.
 		theCustomer.add(cus);
+		 */
 
 		return true;
 	}
     
     public boolean removeCustomer(ArrayList<Customer> theCustomer) {
 		if (theCustomer.size() == 0) {
-			Company.out.println("There is no customer in the company.");
+			System.out.println("There is no customer in the company.");
 			return false;
 		}
 
 		for (int i = 0; i<theCustomer.size(); i++) {
-			Company.out.printf("%d. %s\n", i+1, theCustomer.get(i).getName());
+			/*
+			* theCustomer listesi company'den gelmeli.
+			*
+			* System.out.printf("%d. %s\n", i+1, theCustomer.get(i).getName());
+			 */
 		}
         
-		Scanner scan = new Scanner(Company.in);
+		Scanner scan = new Scanner(System.in);
 		int choice = scan.nextInt();
 		if (choice<0 || choice>theCustomer.size()) {
-			Company.out.println("Invalid entry.");
+			System.out.println("Invalid entry.");
 			return false;
 		}
-		theCustomer.remove(choice);
+		/*
+		* theCustomer listesi company'den gelmeli.
+		* seçilmiş customer o listeden silinmeli.
+		*
+		* theCustomer.remove(choice);
+		 */
 
 		return true;
 	}
     
     public boolean updateCustomer(Customer aCustomer) {
 		if (aCustomer.getName() == "empty") {
-			Company.out.println("There is no customer in the company.");
+			System.out.println("There is no customer in the company.");
 			return false;
 		}
-        
-        Company.out.println("If the name will change, type the new name. Otherwise write -1.");
-		Scanner scan = new Scanner(Company.in);
+
+		System.out.println("If the name will change, type the new name. Otherwise write -1.");
+		Scanner scan = new Scanner(System.in);
 		String name = scan.nextLine();
         if(name == "-1"){
             // do nothing.
         }else{
-            cus.setName(name);
+			aCustomer.setName(name);
         }
-        
-        Company.out.println("If the surname will change, type the new surname. Otherwise write -1.");
-		Scanner scan = new Scanner(Company.in);
+
+		System.out.println("If the surname will change, type the new surname. Otherwise write -1.");
+		scan = new Scanner(System.in);
 		String surname = scan.nextLine();
         if(surname == "-1"){
             // do nothing.
         }else{
-            cus.setSurname(surname);
+			aCustomer.setSurname(surname);
         }
-        
-        Company.out.println("If the address will change, type the new address. Otherwise write -1.");
-		Scanner scan = new Scanner(Company.in);
+
+		System.out.println("If the address will change, type the new address. Otherwise write -1.");
+		scan = new Scanner(System.in);
 		String address = scan.nextLine();
         if(address == "-1"){
             // do nothing.
         }else{
-            cus.setAddress(address);
+			aCustomer.setAddress(address);
         }
-        
-        Company.out.println("If the phone will change, type the new phone. Otherwise write -1.");
-		Scanner scan = new Scanner(Company.in);
+
+		System.out.println("If the phone will change, type the new phone. Otherwise write -1.");
+		scan = new Scanner(System.in);
 		String phone = scan.nextLine();
         if(phone == "-1"){
             // do nothing.
         }else{
-            cus.setPhone(phone);
+			aCustomer.setPhone(Integer.parseInt(phone));
         }
-        
-        Company.out.println("If the score will change, type the new score. Otherwise write -1.");
-		Scanner scan = new Scanner(Company.in);
+
+		System.out.println("If the score will change, type the new score. Otherwise write -1.");
+		scan = new Scanner(System.in);
 		String score = scan.nextLine();
         if(score == "-1"){
             // do nothing.
         }else{
-            cus.setScore(score);
+			aCustomer.setScore(Integer.parseInt(score));
         }
-        
-        Company.out.println("If the balance will change, type the new balance. Otherwise write -1.");
-		Scanner scan = new Scanner(Company.in);
+
+		System.out.println("If the balance will change, type the new balance. Otherwise write -1.");
+		scan = new Scanner(System.in);
 		String balance = scan.nextLine();
         if(balance == "-1"){
             // do nothing.
         }else{
-            cus.setBalance(balance);
+			aCustomer.setBalance(Integer.parseInt(balance));
         }
-        
-        Company.out.println("Sales manager can't change the unique ID.");
+
+		System.out.println("Sales manager can't change the unique ID.");
 
 		return true;
 	}
     
     public boolean rent(Vehicle vehicle, Customer theCustomer) throws NullPointerException {
-        Company.out.println("Please enter the type of the vehicle.");
-		Scanner scan = new Scanner(Company.in);
+		System.out.println("Please enter the type of the vehicle.");
+		Scanner scan = new Scanner(System.in);
 		String vehicleType = scan.nextLine();
-        if( (availableVehicle(ArrayList<Vehicle> vehicles, String vehicleType)) == -1 ) {
-			return false;
-		}
+		/**
+		 * ...
+		 * if( (availableVehicle(ArrayList<Vehicle> vehicles, String vehicleType)) == -1 ) {
+		 * 		return false;
+		 * }
+		 */
+
         // Checking if given parameter is null or not
         if(vehicle == null)
             throw new NullPointerException();
@@ -344,7 +360,7 @@ public class SalesManager implements User {
 		else
 			id += code;
 
-		for (i = 1; i < 3; i++) { //This loop for add '0' to id if digit is small.
+		for (int i = 1; i < 3; i++) { //This loop for add '0' to id if digit is small.
 			if (size+1 < Math.pow(10, 3-i))
 				id += "0";
 		}
