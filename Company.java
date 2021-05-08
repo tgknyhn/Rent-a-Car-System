@@ -12,7 +12,7 @@ public class Company {
 
     // Branches
     private ArrayList<RentalBranch> rentalBranches;
-    private ServiceBranch serviceBranch;
+    private ArrayList<ServiceBranch> serviceBranch;
 
     // Vehicles
     private ArrayList<Vehicle> vehicles;
