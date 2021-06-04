@@ -157,8 +157,8 @@ public class TransportPersonnel implements User {
 	 * @return Returns true if transportation is successfull
 	 */
 	public boolean transportRentalToRental(RentalBranch fromRental, RentalBranch toRental, Vehicle vehicle) {
-		fromrental.getPriorityVehicles().remove(vehicle);
-		return rental.addWithPriority(vehicle);
+		fromRental.getPriorityVehicles().remove(vehicle);
+		return toRental.addWithPriority(vehicle);
 	}
 
 
