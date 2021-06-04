@@ -285,10 +285,12 @@ public class Customer implements Comparable<Customer> {
      * @param service Service that car goes to for maintenance
      */
     public void returnToTransportation(TransportPersonnel personnel, RentalBranch rental, ServiceBranch service) {
+        // temp car
+        Vehicle temp = myVehicle;
         // first returning to the branch
         returnBackToBranch(rental);
         // than transporting it into service
-        personnel.transportRentalToService(rental, service);
+        personnel.transportRentalToService(rental, service, temp);
     }
 
     @Override
