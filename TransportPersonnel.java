@@ -122,34 +122,43 @@ public class TransportPersonnel implements User {
 	 * Transports the maintained vehicle from service branch to the rental branch. 
 	 * @param service Service Branch
 	 * @param rental Rental Branch
+	 * @param vehicle Vehicle
 	 * @return Returns true if transportation is successfull
 	 */
 	public boolean transportServiceToRental(ServiceBranch service, RentalBranch rental) {
-		/* From queue(remove) to arraylist(add) */
 
-		return true;
+		if(vehicle.getDamage() > 0) {
+			System.out.println("Vehicle is still damaged!");
+			return false;
+		}
+		Vehicle vehicle = service.getVehiclesInService().pop();
+		return rental.addWithPriority(vehicle);
 	}
 	
 	/**
 	 * Transports the vehicle from rental branch to the service branch for maintenance.
 	 * @param rental Rental Branch
 	 * @param service Service Branch
+	 * @param vehicle Vehicle
 	 * @return Returns true if transportation is successfull
 	 */
-	public boolean transportRentalToService(RentalBranch rental, ServiceBranch service) {
-		/* From arraylist(remove) to queue(add) */
-
-		return true;
+	public boolean transportRentalToService(RentalBranch rental, ServiceBranch service, Vehicle vehicle) {
+		if(vehicle.getDamage() == 0) {
+			System.out.println("Vehicle does not need maintenance!");
+			return false;
+		}
+		rental.getPriorityVehicles().remove();
+		return service.getVehiclesInService().add(vehicle);
 	}
 	/**
 	 * @param fromRental Rental Branch
 	 * @param toRental Rental Branch
+	 * @param vehicle Vehicle
 	 * @return Returns true if transportation is successfull
 	 */
-	public boolean transportRentalToRental(RentalBranch fromRental, RentalBranch toRental) {
-		/* From arraylist(remove) to arraylist(add) */
-
-		return true;
+	public boolean transportRentalToRental(RentalBranch fromRental, RentalBranch toRental, Vehicle vehicle) {
+		fromrental.getPriorityVehicles().remove(vehicle);
+		return rental.addWithPriority(vehicle);
 	}
 
 
