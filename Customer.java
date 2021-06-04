@@ -111,8 +111,8 @@ public class Customer implements Comparable<Customer> {
     public int getID() { return ID; }
 
     /**
-     *
-     * @return
+     * Returns License status of the customer
+     * @return License status
      */
     public boolean getLicense() { return license; }
 
@@ -173,8 +173,8 @@ public class Customer implements Comparable<Customer> {
     public void setID(int ID) { this.ID = ID; }
 
     /**
-     *
-     * @param license
+     * Changes license status of the customer with given parameter
+     * @param license license status of the customer
      */
     public void setLicense(boolean license) { this.license = license; }
 
@@ -217,12 +217,23 @@ public class Customer implements Comparable<Customer> {
     /* [Renting Methods] */
 
     /**
+     * Prints out all vehicles to the terminal
+     * @param vehicles Vehicle list
+     */
+    public void listAllVehicles(ArrayList<Vehicle> vehicles) {
+        for(Vehicle vehicle : vehicles)
+            System.out.println(vehicle);
+    }
+
+    /**
      * Prints out available vehicles with given parameters
      * @param vehicles Holds all vehicles available
      * @param model Model of the vehicle
      */
     public void searchVehicles(ArrayList<Vehicle> vehicles, String model) {
-        /* Search through every vehicle in the list, print out only given models. */
+        for(Vehicle vehicle : vehicles)
+            if(vehicle.getModel().equals(model))
+                System.out.println(vehicle);
     }
 
     /**
@@ -231,23 +242,57 @@ public class Customer implements Comparable<Customer> {
      * @return Returns true if renting is successful
      * @throws NullPointerException When given parameter is null
      */
-    public boolean rentRequest(Vehicle vehicle) throws NullPointerException {
-        /*  */
+    public boolean rentRequest(Vehicle vehicle, SalesManager manager) throws NullPointerException {
+        boolean rented = manager.rent(vehicle, this);
 
-        return true;
+        if(rented && myVehicle == null) {
+            System.out.println("Sales manager approved your rent request. You rented the car.");
+            myVehicle = vehicle;
+        }
+        else if(rented) {
+            System.out.println("You already have rented a car. First return rented car back to rent a new one.");
+            myVehicle = null;
+        }
+        else {
+            System.out.println("Sales manager rejected your rent request. You couldn't rent the car.");
+            myVehicle = null;
+        }
+
+        return rented;
     }
 
-    public void bringCarBack(ArrayList<RentalBranch> branches) {
-        /* Returns car into branch and system sends this car to the technical branch */
+    /**
+     * Returns customer's car to the given branch
+     * @param branch Branch that gets rented car back
+     */
+    public void returnBackToBranch(RentalBranch branch) {
+        if(branch == null)
+            System.out.println("Given branch is not valid.");
+        else if(myVehicle == null)
+            System.out.println("You don't have a car to return.");
+        else {
+            // giving back to the branch
+            branch.addWithPriority(myVehicle);
+            // removing from customer
+            myVehicle = null;
+        }
+    }
+
+    /**
+     * Return's customer's car back to branch by transportation personnel and sends it to the service branch
+     * @param personnel Personnel that carries the car
+     * @param rental Branch that car belongs to
+     * @param service Service that car goes to for maintenance
+     */
+    public void returnToTransportation(TransportPersonnel personnel, RentalBranch rental, ServiceBranch service) {
+        // first returning to the branch
+        returnBackToBranch(rental);
+        // than transporting it into service
+        personnel.transportRentalToService(rental, service);
     }
 
     @Override
     public int compareTo(Customer o) {
-        if(this.ID > o.getID())
-            return 1;
-        else if(this.ID == o.getID())
-            return 0;
-        else
-            return -1;
+        return Integer.compare(this.ID, o.getID());
     }
 }
