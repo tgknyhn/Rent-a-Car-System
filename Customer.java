@@ -221,6 +221,9 @@ public class Customer implements Comparable<Customer> {
      * @param vehicles Vehicle list
      */
     public void listAllVehicles(ArrayList<Vehicle> vehicles) {
+        Vehicle_Sort vehicleSorter = new Vehicle_Sort();
+        vehicleSorter.sort(vehicles);
+        
         for(Vehicle vehicle : vehicles)
             System.out.println(vehicle);
     }
