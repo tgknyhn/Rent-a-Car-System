@@ -302,6 +302,31 @@ public class Admin implements User {
 
 		return true;
 	}
+	/**
+	 * Lists all employees sorted by their jobs.
+	 * @param transportPersonnels
+	 * @param technicians
+	 * @param salesManagers
+	 */
+	public void list_all_employees(SkipList<User> transportPersonnels , SkipList<User> technicians , ArrayList<User> salesManagers) {
+		
+		ArrayList<User> employees = new ArrayList<User>();
+		
+		for(int i = 0; transportPersonnels.size(); i++) {
+			employees.add(transportPersonnels.get(i));
+		}
+		for(int i = 0; technicians.size(); i++) {
+			employees.add(technicians.get(i));
+		}
+		
+		employees.addAll(salesManagers);
+		
+		// All employees added.
+
+		MergeSort.sort(employees);
+		
+//		System.out.println(employees);
+	}
 
 	// Creates id, adds the type of the user to head of ID.
 	// Checks for t because there is to t's/(Technician, Transportation Personnel)
