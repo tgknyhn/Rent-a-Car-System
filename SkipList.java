@@ -131,6 +131,10 @@ public class SkipList<E extends Comparable<E>> implements Iterable<E>{
      */
     public Iterator<E> iterator() { return new SkipListIter(); }
 
+    User get(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 
     // INNER CLASS - Node //

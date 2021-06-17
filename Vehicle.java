@@ -33,6 +33,10 @@ public class Vehicle {
 //		scoreCount = 0;
 	}
 
+    Vehicle() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 	/* Interface methods*/
 /*
 	public void giveScore(int score) {
@@ -99,5 +103,9 @@ public class Vehicle {
 	public boolean isAvailable() {
 		return available;
 	}
+
+    void setColor(int choice) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 	
 }

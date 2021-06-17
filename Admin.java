@@ -105,7 +105,7 @@ public class Admin implements User {
 		System.out.println("Please choose color. \n"+
 			"1. Black\n"+
 			"2. Blue\n"+
-			"3.Red\n"
+			"3.Red\n" +
 			"Choice: ");
 		choice = scan.nextInt();
 		if (choice < 1 || choice > 3) {
@@ -339,7 +339,7 @@ public class Admin implements User {
 		else
 			id += code;
 		
-        for (i = 1; i < 3; i++) { //This loop for add '0' to id if digit is small.
+        for (int i = 1; i < 3; i++) { //This loop for add '0' to id if digit is small.
         	if (size+1 < Math.pow(10, 3-i))
         		id += "0";
         }
