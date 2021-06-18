@@ -122,31 +122,55 @@ public class Technician implements User {
 	 * @param vehicle
 	 * @return Returns the cost of the damage
 	 */
-	public int checkVehicleSituations(Vehicle vehicle) {
+	//public int checkVehicleSituations(Vehicle vehicle) {
 		/*vehicle clası içersinde araç parçarları olursa(motor far şanzıman kaporta)
 		bu parçaları. araç kaza yapma methoduyla çağırıp belli bir yüzdelik ile hasar verebilir 
 		Technician içersinde tutulan fiyat listesinden bu parçaların fiyatı çıkartılıp fatura kesilebilir.*/
 
-		return 0;
-	}
+	//	return 0;
+	//}
 
 	/**
 	 * @param vehicle
 	 * @return return false if the vehicle is badly damaged beyond repair. If it is repaired, return true.
 	 */	
-	public boolean repairTheDamagedVehicle (Vehicle vehicle) {
+	//public boolean repairTheDamagedVehicle (Vehicle vehicle) {
 		/*hasar miktarını ölcerek belli bir yüzdeliğe göre aracın tamir edilip edilemeyeceğini return eder*/
-		return true;
-	}
+	//	return true;
+	//}
 
 	/**
 	 * @param vehicle
 	 * @return Returns the cost of bill
 	 */
-	public int maintenanceVehilcle(Vehicle vehicle){
-		/*aracın türüne göre periodik bakımının kontrolu.*/
+	public void maintenanceVehilcle(Vehicle vehicle){
+		
+		String[] vehicleParts  = vehicle.getVehicleParts();
+		int[] partsHealth      = vehicle.getPartsHealth();
+		double[] costRatioOfPiece = vehicle.getCostRatioOfPiece();
+		int numberOfParts = vehicle.getNumberOfParts();
+		int totalPriceOfCar = vehicle.getTotalPriceOfCar();
 
-		return 0;
+		double bill=0;
+		for(int i=0;i<numberOfParts;i++){
+			double tempBill=0;
+			tempBill=((100.0-partsHealth[i]))/100.0*costRatioOfPiece[i]*totalPriceOfCar;
+			System.out.println("Part Name: "+vehicleParts[i]+"\tDamege Rate: "+(100-partsHealth[i])+"%"+"\tRepair Cost: "+tempBill+"$");
+			bill+=tempBill;
+		}
+		System.out.println("Toal Repair Cost:"+bill+"$");
+		fixCar(vehicle);
+
+	}
+
+	private void fixCar(Vehicle vehicle){
+		int[] partsHealth      = vehicle.getPartsHealth();
+		int numberOfParts = vehicle.getNumberOfParts();
+		int [] newPartsHealth = new int[numberOfParts];
+			for(int i=0;i<numberOfParts;i++){
+			newPartsHealth[i]=100;
+		}
+		vehicle.setPartsHealth(newPartsHealth);
 	}
 
 
