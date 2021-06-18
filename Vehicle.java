@@ -1,4 +1,4 @@
-
+import java.util.Random;
 public class Vehicle {
 	private final String brand;
 	private final String model;
@@ -11,16 +11,67 @@ public class Vehicle {
 	private int price;
 	private int discountPercent;
 
-	/*
-	private final  String[] vehicleParts  = {"Motor","Far","Sasi","Fren Sistemi", "Camlar","Aksesuarlar"};
-	private final  int[] partsHealth      = {100,100,100,100,100,100};
-	private final  int[] costRatioOfPiece = {0.4,0.02,0,1,0.05,0.06,0,07};
+/**/
+	private final  String[] vehicleParts  = {"Engine","Headlight","Chassis","Brake System", "Wheels","Others"};
+	private   int[] partsHealth      = {100,100,100,100,100,100};
+	private   double[] costRatioOfPiece = {0.06,0.001,0.01,0.009,0.002,0.001};
 	private final  int numberOfParts = 6;
-	*/
+	private int totalPriceOfCar;
+/**/
+
+
+/**/
+	public void drive(){
+		Random r=new Random();
+		double a=r.nextInt(100);
+		if(a<10){
+			makeAccident();
+		}
+		else{
+			for(int i=0;i<numberOfParts;i++) {
+			a=r.nextInt(10);
+			partsHealth[i]-=a;
+			}
+		}
+	}
+/**/
+	private void makeAccident(){
+
+		Random r=new Random();
+		int a;
+		for(int i=0;i<numberOfParts;i++){
+			a=r.nextInt(60)+40;
+			partsHealth[i]-=a;
+		}
+	}
 
 
 
-	Vehicle(String brand, String model, String color, String description, int cost) {
+	public String[] getVehicleParts(){
+		return vehicleParts;
+}
+public int[] getPartsHealth(){
+	return partsHealth;
+}
+
+public double[] getCostRatioOfPiece(){
+	return costRatioOfPiece;
+}
+public int getNumberOfParts(){
+	return numberOfParts;
+}
+
+public void setPartsHealth(int [] newPartsHealth){
+		partsHealth = newPartsHealth;
+}
+
+public int getTotalPriceOfCar(){
+	return totalPriceOfCar;
+}
+
+
+
+	Vehicle(String brand, String model, String color, String description, int cost,int totalCost) {
 		this.brand = brand;
 		this.model = model;
 		this.color = color;
@@ -30,12 +81,9 @@ public class Vehicle {
 		discountPercent = 0;
 		available = true;
 		score = 0;
+		totalPriceOfCar=totalCost;
 //		scoreCount = 0;
 	}
-
-    Vehicle() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 	/* Interface methods*/
 /*
@@ -46,7 +94,6 @@ public class Vehicle {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 	public String getDescription() {
 		return description;
 	}
@@ -104,8 +151,5 @@ public class Vehicle {
 		return available;
 	}
 
-    void setColor(int choice) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 	
 }
