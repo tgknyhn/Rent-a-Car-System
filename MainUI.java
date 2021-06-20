@@ -1,5 +1,5 @@
 public class MainUI {
     public static void main(String[] args) {
-        new CustomerUI();
+        new MainUI();
     }
 }
