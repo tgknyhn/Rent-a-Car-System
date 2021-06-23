@@ -22,9 +22,9 @@ public class Company {
     
     public Company() {
     	customers = new AVLTree<>();
-    	salesManagers = new ArrayList<SalesManager>();
-    	technicians = new ArrayList<Technician>();
-    	transportPersonnels = new ArrayList<TransportPersonnel>();
+    	salesManagers = new SkipList<SalesManager>();
+    	technicians = new SkipList<Technician>();
+    	transportPersonnels = new SkipList<TransportPersonnel>();
     	
     	rentalBranches = new ArrayList<RentalBranch>();
     	serviceBranch = new ArrayList<ServiceBranch>();

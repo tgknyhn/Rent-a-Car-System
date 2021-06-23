@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Queue;
 
-public class TransportPersonnel implements User , Comparable<User> {
+public class TransportPersonnel implements User , Comparable<TransportPersonnel> {
 
 	private String name;
 	private String lastname;
@@ -161,7 +161,7 @@ public class TransportPersonnel implements User , Comparable<User> {
 	}
 
 	@Override
-	public int compareTo(User o) {
+	public int compareTo(TransportPersonnel o) {
 		String ID1 = this.getID();
 		String ID2 = o.getID();
 

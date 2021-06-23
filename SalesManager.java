@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class SalesManager implements User {
+public class SalesManager implements User, Comparable<SalesManager> {
 
 	private String name;
 	private String lastname;
@@ -369,7 +369,7 @@ public class SalesManager implements User {
 	}
 
 	@Override
-	public int compareTo(User o) {
+	public int compareTo(SalesManager o) {
 		String ID1 = this.getID();
 		String ID2 = o.getID();
 

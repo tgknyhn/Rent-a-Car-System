@@ -2,7 +2,6 @@ import java.util.Random;
 public class Vehicle {
 	private final String brand;
 	private final String model;
-	private final String color;
 
 	private boolean available;
 	private int score;
@@ -70,10 +69,9 @@ public class Vehicle {
 
 
 
-	Vehicle(String brand, String model, String color, int price) {
+	Vehicle(String brand, String model, int price) {
 		this.brand = brand;
 		this.model = model;
-		this.color = color;
 		this.price = price;
 		damage = 0;
 		discountPercent = 0;
@@ -84,14 +82,11 @@ public class Vehicle {
     public Vehicle() {
 		this.brand = null;
 		this.model = null;
-		this.color = null;
-//		this.description = description;
 		this.price = 0;
 		damage = 0;
 		discountPercent = 0;
 		available = true;
 		score = 0;
-//		scoreCount = 0;
     }
 
     /* Interface methods*/
@@ -130,10 +125,6 @@ public class Vehicle {
 
 	public String getModel() {
 		return model;
-	}
-
-	public String getColor() {
-		return color;
 	}
 
 	public int getDamage() {

@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Technician implements User , Comparable<User>{
+public class Technician implements User , Comparable<Technician>{
 /**/
 	private String name;
 	private String lastname;
@@ -175,7 +175,7 @@ public class Technician implements User , Comparable<User>{
 
 
 	@Override
-	public int compareTo(User o) {
+	public int compareTo(Technician o) {
 		String ID1 = this.getID();
 		String ID2 = o.getID();
 

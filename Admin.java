@@ -245,7 +245,8 @@ public class Admin implements User {
 		return true;
 	}
 
-	public ArrayList<User> list_all_employees(SkipList<User> transportPersonnels , SkipList<User> technicians , ArrayList<User> salesManagers) {
+	public ArrayList<User> list_all_employees(SkipList<TransportPersonnel> transportPersonnels ,
+											  SkipList<Technician> technicians , SkipList<SalesManager> salesManagers) {
 		
 		ArrayList<User> employees = new ArrayList<User>();
 		
@@ -255,8 +256,9 @@ public class Admin implements User {
 		for(int i = 0; i<technicians.size(); i++) {
 			employees.add(technicians.get(i));
 		}
-		
-		employees.addAll(salesManagers);
+		for(int i = 0; i<salesManagers.size(); i++) {
+			employees.add(salesManagers.get(i));
+		}
 		
 		// All employees added.
 
@@ -282,14 +284,6 @@ public class Admin implements User {
         }
         id += Integer.toString(size+1);
         return id;
-	}
-
-	@Override
-	public int compareTo(User o) {
-		String ID1 = this.getID();
-		String ID2 = o.getID();
-
-		return ID1.compareTo(ID2);
 	}
 }
 
