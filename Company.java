@@ -28,7 +28,9 @@ public class Company {
     	
     	rentalBranches = new ArrayList<RentalBranch>();
     	serviceBranch = new ArrayList<ServiceBranch>();
-    	
+
+    	customers.add(new Customer("ahmet", "sese", "adres", "60001", "1234"));
+
     	vehicles = new ArrayList<Vehicle>();
     	try {
 			FileReader fr = new FileReader("vehicles.txt");
@@ -37,13 +39,12 @@ public class Company {
 			String line;
 			
 			while( (line = br.readLine()) != null) {
-				String tokens[] = line.split("-");
+				String[] tokens = line.split("-");
 				Vehicle temp = new Vehicle(tokens[0] , tokens[1] , Integer.parseInt(tokens[2]));
 				vehicles.add(temp);		
 			}
 			br.close();
 			fr.close();
-					
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
