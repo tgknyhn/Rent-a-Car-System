@@ -85,7 +85,20 @@ public int getTotalPriceOfCar(){
 //		scoreCount = 0;
 	}
 
-	/* Interface methods*/
+    public Vehicle() {
+		this.brand = null;
+		this.model = null;
+		this.color = null;
+//		this.description = description;
+		this.price = 0;
+		damage = 0;
+		discountPercent = 0;
+		available = true;
+		score = 0;
+//		scoreCount = 0;
+    }
+
+    /* Interface methods*/
 /*
 	public void giveScore(int score) {
 		this.score = ((this.score * scoreCount) + score) / (scoreCount + 1);
@@ -151,5 +164,5 @@ public int getTotalPriceOfCar(){
 		return available;
 	}
 
-	
+
 }

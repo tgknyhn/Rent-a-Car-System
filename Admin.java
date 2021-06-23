@@ -86,10 +86,11 @@ public class Admin implements User {
 
 
 	public boolean addVehicle(ServiceBranch sBranch) {
-		System.out.println("Please choose the vehicle. \n"+
-			"1. Car\n"+
-			"2. Bike\n"+
-			"Choice: ");
+		System.out.println("""
+				Please choose the vehicle.\s
+				1. Car
+				2. Bike
+				Choice:\s""");
 		Scanner scan = new Scanner(System.in);
 		int choice = scan.nextInt();
 		if (choice < 1 || choice > 2) {
@@ -101,7 +102,7 @@ public class Admin implements User {
 			vehicle = new Vehicle();
 		}
 		else
-			vehicle = new Bike();
+			vehicle = new Vehicle();
 		System.out.println("Please choose color. \n"+
 			"1. Black\n"+
 			"2. Blue\n"+
