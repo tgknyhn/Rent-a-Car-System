@@ -149,6 +149,8 @@ public class Customer implements User, Comparable<Customer> {
      */
     public boolean getLicense() { return license; }
 
+    public Vehicle getMyVehicle() { return myVehicle; }
+
     /* [Setters] */
 
     /**
@@ -284,14 +286,10 @@ public class Customer implements User, Comparable<Customer> {
             System.out.println("Sales manager approved your rent request. You rented the car.");
             myVehicle = vehicle;
         }
-        else if(rented) {
+        else if(rented)
             System.out.println("You already have rented a car. First return rented car back to rent a new one.");
-            myVehicle = null;
-        }
-        else {
+        else
             System.out.println("Sales manager rejected your rent request. You couldn't rent the car.");
-            myVehicle = null;
-        }
 
         return rented;
     }

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -16,19 +17,21 @@ public class CustomerUI extends JFrame implements ActionListener {
     private JButton button_returnCar;
     private JButton button_search;
 
-    private JComboBox<String> comboBox_models;
+    private JComboBox<String> comboBox_brands;
     private JComboBox<String> comboBox_branches;
 
+    private Customer customer;
     private BranchGraph graph;
     private Map<String, Integer> provinceMap;
     private Map<Integer, String> provinceMapReverse;
 
     private final Company company;
 
-    public CustomerUI(BranchGraph graph, Company company) throws FileNotFoundException {
+    public CustomerUI(BranchGraph graph, Company company, Customer customer) throws FileNotFoundException {
         // Initializing data fields
         this.company = company;
         this.graph = graph;
+        this.customer = customer;
         initProvinceMap();
 
 
@@ -41,6 +44,7 @@ public class CustomerUI extends JFrame implements ActionListener {
         add(getStatus());
         add(getReturn());
 
+        this.button_returnCar.setEnabled(false);
         // JFrame properties
         setTitle("Customer Menu");
         setLayout(null);
@@ -118,24 +122,28 @@ public class CustomerUI extends JFrame implements ActionListener {
         panel.setBounds(0,200,275,50);
 
         // Initializing the components
-        comboBox_models = new JComboBox<>();
+        comboBox_brands = new JComboBox<>();
         JLabel text_models = new JLabel();
 
         // Listeners
-        comboBox_models.addActionListener(this);
+        comboBox_brands.addActionListener(this);
 
         // Component properties
-        comboBox_models.setBounds(120, 15, 125, 20);
-        comboBox_models.addItem("selam");
-        comboBox_models.addItem("selam2");
-        comboBox_models.addItem("selam3");
+        comboBox_brands.setBounds(120, 15, 125, 20);
+        comboBox_brands.addItem("BMW");
+        comboBox_brands.addItem("Toyota");
+        comboBox_brands.addItem("Volkswagen");
+        comboBox_brands.addItem("Dacia");
+        comboBox_brands.addItem("Renault");
+        comboBox_brands.addItem("Audi");
+        comboBox_brands.addItem("Volvo");
 
         text_models.setBounds(15, 14, 125, 20);
         text_models.setFont(new Font(null, Font.BOLD, 15));
-        text_models.setText("Select Model:");
+        text_models.setText("Select Brand:");
 
         // Adding components to the JPanel
-        panel.add(comboBox_models);
+        panel.add(comboBox_brands);
         panel.add(text_models);
 
         // Returning JPanel
@@ -278,11 +286,152 @@ public class CustomerUI extends JFrame implements ActionListener {
         }
         else if(source == button_exit)
             System.exit(0);
-        else if(source == comboBox_models) {
-            System.out.println("ss|nn");
+        else if(source == button_search) {
+            new SearchUI((String)comboBox_brands.getSelectedItem()).setAlwaysOnTop(true);
         }
-        else if(source == comboBox_branches) {
-            System.out.println("selam");
+        else if(source == button_vehicleStat) {
+            new StatusUI(customer.getMyVehicle()).setAlwaysOnTop(true);
+        }
+        else if(source == button_returnCar) {
+            customer.returnBackToBranch(new RentalBranch("yey"));
+            button_returnCar.setEnabled(false);
+        }
+    }
+
+
+    private class SearchUI extends JFrame implements ActionListener {
+        private JComboBox<String> selectedVehicles;
+        private ArrayList<Vehicle> vehicles;
+
+        private JButton button_exit;
+        private JButton button_rent;
+
+        public SearchUI(String brand){
+            selectedVehicles = new JComboBox<>();
+
+            vehicles = company.getVehicles();
+
+            for (Vehicle vehicle : vehicles)
+                if (vehicle.getBrand().equals(brand))
+                    selectedVehicles.addItem(vehicle.getBrand() + " | " + vehicle.getModel() + " | " + vehicle.getPrice());
+
+            selectedVehicles.setLayout(null);
+            selectedVehicles.setBounds(15, 60, 150, 20);
+
+            add(selectedVehicles);
+            add(this.getGreeting());
+            add(this.getButtons());
+
+            // JFrame properties
+            setTitle("Search Vehicles");
+            setLayout(null);
+            setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            getContentPane().setBackground(new Color(0x64777a));
+            setSize(200, 180);
+            setLocationRelativeTo(null);
+            setResizable(false);
+            setVisible(true);
+        }
+
+        private JPanel getGreeting() {
+            // Initializing JPanel
+            JPanel panel = new JPanel();
+
+            // JPanel properties
+            panel.setLayout(null);
+            panel.setBounds(0,0,200,40);
+
+            // Initializing components
+            JLabel text_customerMenu = new JLabel();
+
+            // Component properties
+            text_customerMenu.setFont(new Font(null, Font.PLAIN, 20));
+            text_customerMenu.setText("Vehicles");
+            text_customerMenu.setBounds(50,10, 200, 20);
+
+
+            // Adding components to the JPanel
+            panel.add(text_customerMenu);
+
+            // Returning JPanel
+            return panel;
+        }
+
+        private JPanel getButtons() {
+            // Initializing JPanel
+            JPanel panel = new JPanel();
+
+            // JPanel properties
+            panel.setLayout(null);
+            panel.setBounds(0,100, 200, 100);
+            panel.setBackground(Color.BLACK);
+
+            // Initializing components
+            button_exit = new JButton("Back");
+            button_rent = new JButton("Rent");
+
+            // Listeners
+            button_exit.addActionListener(this);
+            button_rent.addActionListener(this);
+
+            // Component properties
+            button_exit.setBounds(0,0, 95, 40);
+            button_rent.setBounds(95,0, 95, 40);
+
+            button_exit.setFont(new Font(null, Font.BOLD, 15));
+            button_rent.setFont(new Font(null, Font.BOLD, 15));
+
+            // Adding components to the JPanel
+            panel.add(button_exit);
+            panel.add(button_rent);
+
+            return panel;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(e.getSource() == this.button_exit)
+                dispose();
+            else if(e.getSource() == this.button_rent) {
+                String currVehicle = selectedVehicles.getSelectedItem().toString();
+
+                for(int i=0; i<vehicles.size(); i++)
+                    if(currVehicle.contains(vehicles.get(i).getModel())) {
+                        customer.rentRequest(vehicles.get(i), new SalesManager());
+                        button_returnCar.setEnabled(true);
+                    }
+
+            }
+        }
+    }
+
+    private class StatusUI extends JFrame {
+        public StatusUI(Vehicle vehicle) {
+            JLabel text = new JLabel();
+
+            text.setLayout(null);
+            text.setFont(new Font(null, Font.BOLD, 20));
+            if(vehicle == null) {
+                text.setText("You don't own a vehicle");
+                text.setBounds(0,0, 400, 100);
+            }
+            else {
+                text.setText("You rented \"" + vehicle.getBrand() + " | " + vehicle.getModel() + " | " + vehicle.getPrice() + "\"");
+                text.setBounds(0,0, 400, 100);
+            }
+
+
+            add(text);
+
+            // JFrame properties
+            setTitle("Vehicle Status");
+            setLayout(null);
+            setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            getContentPane().setBackground(new Color(0x64777a));
+            setSize(600, 150);
+            setLocationRelativeTo(null);
+            setResizable(false);
+            setVisible(true);
         }
     }
 }

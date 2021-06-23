@@ -2,36 +2,36 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Company {
     // Administrator
     private Admin admin;
-
+    // Customer
+    private AVLTree<Customer> customers;
     // Employee
-    private AVLTree<Customer>     customers;
     private SkipList<SalesManager>   	 salesManagers;
     private SkipList<Technician>         technicians;
     private SkipList<TransportPersonnel> transportPersonnels;
-
     // Branches
     private ArrayList<RentalBranch> rentalBranches;
     private ArrayList<ServiceBranch> serviceBranch;
-
     // Vehicles
     private ArrayList<Vehicle> vehicles;
     
-    public Company() {
-    	customers = new AVLTree<>();
-    	salesManagers = new SkipList<SalesManager>();
-    	technicians = new SkipList<Technician>();
+    public Company(Admin admin) {
+		this.admin = admin;
+    	customers           = new AVLTree<>();
+    	salesManagers 		= new SkipList<SalesManager>();
+    	technicians 		= new SkipList<Technician>();
     	transportPersonnels = new SkipList<TransportPersonnel>();
     	
-    	rentalBranches = new ArrayList<RentalBranch>();
-    	serviceBranch = new ArrayList<ServiceBranch>();
+    	rentalBranches = new ArrayList<>();
+    	serviceBranch  = new ArrayList<>();
 
     	customers.add(new Customer("ahmet", "sese", "adres", "60001", "1234"));
 
-    	vehicles = new ArrayList<Vehicle>();
+    	vehicles = new ArrayList<>();
     	try {
 			FileReader fr = new FileReader("vehicles.txt");
 			BufferedReader br = new BufferedReader(fr);
@@ -49,8 +49,6 @@ public class Company {
 			e.printStackTrace();
 		}
     }
-
-    public void addAdmin() { /* */ }
 
     public Admin getAdmin() { return admin; }
 

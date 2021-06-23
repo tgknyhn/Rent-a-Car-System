@@ -321,9 +321,6 @@ public class SalesManager implements User, Comparable<SalesManager> {
 	}
     
     public boolean rent(Vehicle vehicle, Customer theCustomer) throws NullPointerException {
-		System.out.println("Please enter the type of the vehicle.");
-		Scanner scan = new Scanner(System.in);
-		String vehicleType = scan.nextLine();
 		/**
 		 * ...
 		 * if( (availableVehicle(ArrayList<Vehicle> vehicles, String vehicleType)) == -1 ) {

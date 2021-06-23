@@ -29,6 +29,7 @@ public class Admin implements User {
 		setName(name);
 		setLastname(lastname);
 		setEmail(email);
+		this.ID = ID;
 		setPassword(password);
 	}
 

@@ -171,12 +171,15 @@ public class LoginUI extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(e.getSource());
         if(e.getSource() == button_exit)
             System.exit(0);
         else if(e.getSource() == button_next) {
             if(user.equals("Admin")) {
                 Admin admin = company.getAdmin();
+                System.out.println(admin.getID());
+                System.out.println(ID);
+                System.out.println(admin.getPassword());
+                System.out.println(password);
                 if(admin.getID().equals(ID) && admin.getPassword().equals(password)) {
                     dispose();
                     // Admin gui
@@ -223,7 +226,7 @@ public class LoginUI extends JFrame implements ActionListener {
             }
             else if(user.equals("Customer")) {
                 AVLTree<Customer> customers = company.getCustomers();
-                Customer customer;
+                Customer customer = null;
                 boolean isValid = false;
 
                 Iterator<Customer> itr = customers.iterator();
@@ -231,16 +234,16 @@ public class LoginUI extends JFrame implements ActionListener {
                 while(itr.hasNext()) {
                     customer = itr.next();
 
-                    System.out.println(customer.getID() + " digeri: " + ID);
-
-                    if(customer.getID().equals(ID) && customer.getPassword().equals(password))
+                    if(customer.getID().equals(ID) && customer.getPassword().equals(password)) {
                         isValid = true;
+                        break;
+                    }
                 }
 
                 if(isValid) {
                     dispose();
                     try {
-                        new CustomerUI(null, this.company);
+                        new CustomerUI(null, this.company, customer);
                     } catch (FileNotFoundException fileNotFoundException) {
                         System.exit(0);
                     }
