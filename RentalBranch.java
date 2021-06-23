@@ -1,38 +1,22 @@
-import java.util.ArrayList;
 import java.util.PriorityQueue;
 
-public class RentalBranch extends Branch {
+public class RentalBranch {
+    // Data Fields //
+    private final int    branchID;
+    private final String branchName;
     // Vehicles
-    private PriorityQueue<Vehicle> priorityVehicles;
+    private PriorityQueue<String> priorityVehicles;
 
-
-    /**
-     *
-     * @param branchName
-     */
-    public RentalBranch(String branchName) {
-        super(branchName);
+    public RentalBranch(String branchName, int branchID) {
+        this.branchID = branchID;
+        this.branchName = branchName;
     }
 
-    RentalBranch() {
-        super(null);
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    // Getters //
 
-    public PriorityQueue<Vehicle> getPriorityVehicles() { return priorityVehicles; }
+    public int getBranchID() { return branchID; }
 
-    /**
-     *
-     * @param vehicle
-     * @return
-     */
-    public boolean addWithPriority(Vehicle vehicle) { priorityVehicles.offer(vehicle); return true; }
+    public String getBranchName() { return branchName; }
 
-    void setName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    String getName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

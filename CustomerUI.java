@@ -2,6 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 @SuppressWarnings("DuplicatedCode")
 public class CustomerUI extends JFrame implements ActionListener {
@@ -14,7 +19,16 @@ public class CustomerUI extends JFrame implements ActionListener {
     private JComboBox<String> comboBox_models;
     private JComboBox<String> comboBox_branches;
 
-    public CustomerUI() {
+    private final BranchGraph branchGraph;
+    private Map<String, Integer> provinceMap;
+    private Map<Integer, String> provinceMapReverse;
+
+    public CustomerUI(BranchGraph branchGraph) throws FileNotFoundException {
+        // Initializing data fields
+        this.branchGraph = branchGraph;
+        initProvinceMap();
+
+
         // Adding components to the JFrame
         add(getGreeting());
         add(getButtons());
@@ -142,9 +156,8 @@ public class CustomerUI extends JFrame implements ActionListener {
 
         // Component properties
         comboBox_branches.setBounds(120, 15, 125, 20);
-        comboBox_branches.addItem("selam");
-        comboBox_branches.addItem("selam2");
-        comboBox_branches.addItem("selam3");
+        for(int i=1; i<=81; i++)
+            comboBox_branches.addItem(provinceMapReverse.get(i));
 
         text_branches.setBounds(10, 14, 125, 20);
         text_branches.setFont(new Font(null, Font.BOLD, 15));
@@ -231,6 +244,27 @@ public class CustomerUI extends JFrame implements ActionListener {
         return panel;
     }
 
+    private void initProvinceMap() throws FileNotFoundException {
+        Scanner scan = new Scanner(new File("src\\provinces.txt"));
+
+        provinceMap = new HashMap<>();
+        provinceMapReverse = new HashMap<>();
+
+        int branchID;
+        String province;
+
+        for(int i=0; i<81 ;i++) {
+            // Getting information
+            branchID = Integer.parseInt(scan.nextLine());
+            province = scan.nextLine();
+            // Inserting into the Map
+            provinceMap.put(province, branchID);
+            provinceMapReverse.put(branchID, province);
+        }
+
+        scan.close();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
@@ -243,6 +277,9 @@ public class CustomerUI extends JFrame implements ActionListener {
             System.exit(0);
         else if(source == comboBox_models) {
             System.out.println("ss|nn");
+        }
+        else if(source == comboBox_branches) {
+            System.out.println("selam");
         }
     }
 }

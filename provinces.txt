@@ -101,7 +101,7 @@ Nevsehir
 51
 Nigde
 52
-Manisa
+Ordu
 53
 Rize
 54
@@ -140,7 +140,8 @@ Bayburt
 Karaman
 71
 Kirikkale
-72Batman
+72
+Batman
 73
 Sirnak
 74
@@ -200,7 +201,7 @@ Bitlis
 4
 Yozgat
 Tokat
-Samsin
+Samsun
 Corum
 
 6
@@ -692,7 +693,7 @@ Kutahya
 65
 5
 Hakkari
-Siranak
+Sirnak
 Siirt
 Bitlis
 Agri
@@ -746,7 +747,8 @@ Corum
 Cankiri
 Ankara
 
-725
+72
+5
 Mardin
 Siirt
 Bitlis
