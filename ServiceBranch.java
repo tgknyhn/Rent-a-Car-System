@@ -10,8 +10,8 @@ public class ServiceBranch extends Branch {
         super(branchName);
     }
 
-    ServiceBranch() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ServiceBranch() {
+        super("");
     }
 
     public Queue<Vehicle> getVehiclesInService() { return vehiclesInService; }

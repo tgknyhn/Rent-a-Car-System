@@ -1,6 +1,7 @@
+import java.util.Iterator;
 import java.util.PriorityQueue;
 
-public class RentalBranch {
+public class RentalBranch extends Branch {
     // Data Fields //
     private final int    branchID;
     private final String branchName;
@@ -8,6 +9,7 @@ public class RentalBranch {
     private PriorityQueue<String> priorityVehicles;
 
     public RentalBranch(String branchName, int branchID) {
+        super(branchName);
         this.branchID = branchID;
         this.branchName = branchName;
     }
@@ -19,4 +21,11 @@ public class RentalBranch {
     public String getBranchName() { return branchName; }
 
 
+    public boolean addWithPriority(Vehicle myVehicle) {
+        return false;
+    }
+
+    public PriorityQueue<Vehicle> getPriorityVehicles() {
+        return null;
+    }
 }

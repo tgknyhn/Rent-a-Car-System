@@ -367,4 +367,12 @@ public class SalesManager implements User {
 		id += Integer.toString(size+1);
 		return id;
 	}
+
+	@Override
+	public int compareTo(User o) {
+		String ID1 = this.getID();
+		String ID2 = o.getID();
+
+		return ID1.compareTo(ID2);
+	}
 }

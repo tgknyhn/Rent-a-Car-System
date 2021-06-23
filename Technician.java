@@ -158,7 +158,7 @@ public class Technician implements User {
 			System.out.println("Part Name: "+vehicleParts[i]+"\tDamege Rate: "+(100-partsHealth[i])+"%"+"\tRepair Cost: "+tempBill+"$");
 			bill+=tempBill;
 		}
-		System.out.println("Toal Repair Cost:"+bill+"$");
+		System.out.println("Total Repair Cost:"+bill+"$");
 		fixCar(vehicle);
 
 	}
@@ -174,5 +174,11 @@ public class Technician implements User {
 	}
 
 
+	@Override
+	public int compareTo(User o) {
+		String ID1 = this.getID();
+		String ID2 = o.getID();
 
-}	
+		return ID1.compareTo(ID2);
+	}
+}

@@ -19,13 +19,13 @@ public class CustomerUI extends JFrame implements ActionListener {
     private JComboBox<String> comboBox_models;
     private JComboBox<String> comboBox_branches;
 
-    private final BranchGraph branchGraph;
+    private BranchGraph graph;
     private Map<String, Integer> provinceMap;
     private Map<Integer, String> provinceMapReverse;
 
-    public CustomerUI(BranchGraph branchGraph) throws FileNotFoundException {
+    public CustomerUI(BranchGraph graph) throws FileNotFoundException {
         // Initializing data fields
-        this.branchGraph = branchGraph;
+        this.graph = graph;
         initProvinceMap();
 
 
@@ -245,7 +245,7 @@ public class CustomerUI extends JFrame implements ActionListener {
     }
 
     private void initProvinceMap() throws FileNotFoundException {
-        Scanner scan = new Scanner(new File("src\\provinces.txt"));
+        Scanner scan = new Scanner(new File("provinces.txt"));
 
         provinceMap = new HashMap<>();
         provinceMapReverse = new HashMap<>();

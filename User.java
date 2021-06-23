@@ -1,4 +1,4 @@
-public interface User {
+public interface User extends Comparable<User> {
 
 
     String getID();

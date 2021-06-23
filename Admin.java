@@ -5,7 +5,7 @@ public class Admin implements User {
 	private final int MAX_EMP_SIZE = 1000;
 	private String name;
 	private String lastname;
-	private String id;
+	private String ID;
 	private String email;
 	private String password;
 
@@ -56,7 +56,7 @@ public class Admin implements User {
 
 	@Override
 	public void setID(String ID) {
-		this.id = ID;
+		this.ID = ID;
 	}
 
 	@Override
@@ -81,45 +81,12 @@ public class Admin implements User {
 
 	@Override
 	public String getID() {
-		return this.id;
+		return this.ID;
 	}
 
 
-	public boolean addVehicle(ServiceBranch sBranch) {
-		System.out.println("""
-				Please choose the vehicle.\s
-				1. Car
-				2. Bike
-				Choice:\s""");
-		Scanner scan = new Scanner(System.in);
-		int choice = scan.nextInt();
-		if (choice < 1 || choice > 2) {
-			System.out.println("Invalid entry. Try again later.");
-			return false;
-		}
-		Vehicle vehicle;
-		if (choice == 1) {
-			vehicle = new Vehicle();
-		}
-		else
-			vehicle = new Vehicle();
-		System.out.println("Please choose color. \n"+
-			"1. Black\n"+
-			"2. Blue\n"+
-			"3.Red\n" +
-			"Choice: ");
-		choice = scan.nextInt();
-		if (choice < 1 || choice > 3) {
-			System.out.println("Invalid entry. Try again later.");
-			return false;
-		}
-		if (balance < vehicle.getPrice()) {
-			System.out.println("You can not afford that. Returning to menu.");
-			return false;
-		}
-		vehicle.setColor(choice);
+	public void addVehicle(ServiceBranch sBranch, Vehicle vehicle) {
 		sBranch.addVehicle(vehicle);
-		return true;
 	}
 
 	public boolean removeVehicle(ServiceBranch sBranch) {
@@ -136,31 +103,17 @@ public class Admin implements User {
 		return true;
 	}
 
-	public boolean addRentalBranch(ArrayList<RentalBranch> rBranches) {
-		RentalBranch rb = new RentalBranch();
-		System.out.println("Please type the name of the new rental branch: ");
-		Scanner scan = new Scanner(System.in);
-		String name = scan.nextLine();
-		rb.setName(name);
-		rBranches.add(rb);
+	public boolean addRentalBranch(ArrayList<RentalBranch> rBranches, String branchName, int branchID) {
+		RentalBranch rb = new RentalBranch(branchName, branchID);
+		if(rBranches.contains(rb))
+			return false;
 
+		rBranches.add(rb);
 		return true;
 	}
 
-	public boolean removeRentalBranch(ArrayList<RentalBranch> rBranches) {
-		int i;
-		for (i = 0; i < rBranches.size();i++) {
-			System.out.println(""+rBranches.get(i).getName());
-		}
-		Scanner scan = new Scanner(System.in);
-		int choice = scan.nextInt();
-		if (choice < 0 || choice > rBranches.size()) {
-			System.out.println("Invalid entry.");
-			return false;
-		}
-		rBranches.remove(choice);
-
-		return true;
+	public boolean removeRentalBranch(ArrayList<RentalBranch> rBranches, RentalBranch branch) {
+		return rBranches.remove(branch);
 	}
 
 	public boolean addServiceBranch(ArrayList<ServiceBranch> sBranches) {
@@ -174,20 +127,8 @@ public class Admin implements User {
 		return true;
 	}
 
-	public boolean removeServiceBranch(ArrayList<ServiceBranch> sBranches) {
-		int i;
-		for (i = 0; i < sBranches.size();i++) {
-			System.out.printf("%d. %s\n", i+1, sBranches.get(i).getName());
-		}
-		Scanner scan = new Scanner(System.in);
-		int choice = scan.nextInt();
-		if (choice < 0 || choice > sBranches.size()) {
-			System.out.println("Invalid entry.");
-			return false;
-		}
-		sBranches.remove(choice);
-
-		return true;
+	public boolean removeServiceBranch(ArrayList<ServiceBranch> sBranches, ServiceBranch branch) {
+		return sBranches.remove(branch);
 	}
 
 	public boolean addSalesManager(ArrayList<SalesManager> sManagers) {
@@ -303,20 +244,15 @@ public class Admin implements User {
 
 		return true;
 	}
-	/**
-	 * Lists all employees sorted by their jobs.
-	 * @param transportPersonnels
-	 * @param technicians
-	 * @param salesManagers
-	 */
-	public void list_all_employees(SkipList<User> transportPersonnels , SkipList<User> technicians , ArrayList<User> salesManagers) {
+
+	public ArrayList<User> list_all_employees(SkipList<User> transportPersonnels , SkipList<User> technicians , ArrayList<User> salesManagers) {
 		
 		ArrayList<User> employees = new ArrayList<User>();
 		
-		for(int i = 0; transportPersonnels.size(); i++) {
+		for(int i = 0; i<transportPersonnels.size(); i++) {
 			employees.add(transportPersonnels.get(i));
 		}
-		for(int i = 0; technicians.size(); i++) {
+		for(int i = 0; i<technicians.size(); i++) {
 			employees.add(technicians.get(i));
 		}
 		
@@ -325,8 +261,8 @@ public class Admin implements User {
 		// All employees added.
 
 		MergeSort.sort(employees);
-		
-//		System.out.println(employees);
+
+		return employees;
 	}
 
 	// Creates id, adds the type of the user to head of ID.
@@ -348,6 +284,13 @@ public class Admin implements User {
         return id;
 	}
 
+	@Override
+	public int compareTo(User o) {
+		String ID1 = this.getID();
+		String ID2 = o.getID();
+
+		return ID1.compareTo(ID2);
+	}
 }
 
 

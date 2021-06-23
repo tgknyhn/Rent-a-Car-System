@@ -125,13 +125,12 @@ public class TransportPersonnel implements User {
 	 * @param vehicle Vehicle
 	 * @return Returns true if transportation is successfull
 	 */
-	public boolean transportServiceToRental(ServiceBranch service, RentalBranch rental) {
-
+	public boolean transportServiceToRental(ServiceBranch service, RentalBranch rental, Vehicle vehicle) {
 		if(vehicle.getDamage() > 0) {
 			System.out.println("Vehicle is still damaged!");
 			return false;
 		}
-		Vehicle vehicle = service.getVehiclesInService().pop();
+		vehicle = service.getVehiclesInService().poll();
 		return rental.addWithPriority(vehicle);
 	}
 	
@@ -161,9 +160,14 @@ public class TransportPersonnel implements User {
 		return toRental.addWithPriority(vehicle);
 	}
 
+	@Override
+	public int compareTo(User o) {
+		String ID1 = this.getID();
+		String ID2 = o.getID();
 
-
-}	
+		return ID1.compareTo(ID2);
+	}
+}
 
 	
 

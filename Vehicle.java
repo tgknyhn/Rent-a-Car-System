@@ -11,17 +11,15 @@ public class Vehicle {
 	private int price;
 	private int discountPercent;
 
-/**/
-	private final  String[] vehicleParts  = {"Engine","Headlight","Chassis","Brake System", "Wheels","Others"};
-	private   int[] partsHealth      = {100,100,100,100,100,100};
-	private   double[] costRatioOfPiece = {0.06,0.001,0.01,0.009,0.002,0.001};
-	private final  int numberOfParts = 6;
-	private int totalPriceOfCar;
-/**/
+	private final String[] vehicleParts  = {"Engine","Headlight","Chassis","Brake System", "Wheels","Others"};
+	private       int[] partsHealth      = {100,100,100,100,100,100};
+	private       double[] costRatioOfPiece = {0.06,0.001,0.01,0.009,0.002,0.001};
+	private final int numberOfParts = 6;
+	private       int totalPriceOfCar;
 
 
 /**/
-	public void drive(){
+	public void drive() {
 		Random r=new Random();
 		double a=r.nextInt(100);
 		if(a<10){
@@ -29,14 +27,13 @@ public class Vehicle {
 		}
 		else{
 			for(int i=0;i<numberOfParts;i++) {
-			a=r.nextInt(10);
-			partsHealth[i]-=a;
+				a=r.nextInt(10);
+				partsHealth[i]-=a;
 			}
 		}
 	}
 /**/
 	private void makeAccident(){
-
 		Random r=new Random();
 		int a;
 		for(int i=0;i<numberOfParts;i++){
@@ -50,22 +47,24 @@ public class Vehicle {
 	public String[] getVehicleParts(){
 		return vehicleParts;
 }
-public int[] getPartsHealth(){
+
+	public int[] getPartsHealth(){
 	return partsHealth;
 }
 
-public double[] getCostRatioOfPiece(){
+	public double[] getCostRatioOfPiece(){
 	return costRatioOfPiece;
 }
-public int getNumberOfParts(){
+
+	public int getNumberOfParts(){
 	return numberOfParts;
 }
 
-public void setPartsHealth(int [] newPartsHealth){
+	public void setPartsHealth(int [] newPartsHealth){
 		partsHealth = newPartsHealth;
 }
 
-public int getTotalPriceOfCar(){
+	public int getTotalPriceOfCar(){
 	return totalPriceOfCar;
 }
 
