@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
-public class Customer implements Comparable<Customer> {
+public class Customer implements User, Comparable<Customer> {
     // Bounds for score
     private final int MAX_SCORE = 100;
     private final int MIN_SCORE = -100;
@@ -9,11 +9,14 @@ public class Customer implements Comparable<Customer> {
     private final int MAX_BALANCE = 10000;
     private final int MIN_BALANCE = 0;
     // Customer information
-    private String name, surname, address;
+    private String name;
+    private String lastname;
+    private String address;
+    private String email;
+    private String ID;
     private int phone;
     private int score;
     private int balance;
-    private int ID;
     private boolean license;
     // Vehicle information
     private Vehicle myVehicle;
@@ -27,10 +30,10 @@ public class Customer implements Comparable<Customer> {
         setName("empty");
         setSurname("empty");
         setAddress("empty");
+        setID("0");
         setPhone(0);
         setScore(0);
         setBalance(0);
-        setID(0);
         setLicense(false);
     }
 
@@ -43,7 +46,7 @@ public class Customer implements Comparable<Customer> {
      * @param score Score of the customer
      * @param ID ID of the customer
      */
-    public Customer(String name, String surname, String address, int phone, int score, int balance, int ID, boolean license) {
+    public Customer(String name, String surname, String address, String ID, int phone, int score, int balance, boolean license) {
         setName(name);
         setSurname(surname);
         setAddress(address);
@@ -68,8 +71,33 @@ public class Customer implements Comparable<Customer> {
      * Returns surname of the customer
      * @return Surname of the customer
      */
-    public String getSurname() {
-        return surname;
+    public String getLastname() {
+        return lastname;
+    }
+
+    @Override
+    public void setLastname(String surname) {
+
+    }
+
+    @Override
+    public String getEmail() {
+        return null;
+    }
+
+    @Override
+    public void setEmail(String email) {
+
+    }
+
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
+    public void setPassword(String password) {
+
     }
 
     /**
@@ -108,7 +136,7 @@ public class Customer implements Comparable<Customer> {
      * Returns ID of the customer
      * @return ID of the customer
      */
-    public int getID() { return ID; }
+    public String getID() { return ID; }
 
     /**
      * Returns License status of the customer
@@ -128,10 +156,10 @@ public class Customer implements Comparable<Customer> {
 
     /**
      * Changes surname of the customer with given parameter
-     * @param surname New surname of the customer
+     * @param lastname New surname of the customer
      */
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setSurname(String lastname) {
+        this.lastname = lastname;
     }
 
     /**
@@ -170,7 +198,7 @@ public class Customer implements Comparable<Customer> {
      * Changes ID of the customer with given parameter
      * @param ID New ID of the customer
      */
-    public void setID(int ID) { this.ID = ID; }
+    public void setID(String ID) { this.ID = ID; }
 
     /**
      * Changes license status of the customer with given parameter
@@ -298,6 +326,9 @@ public class Customer implements Comparable<Customer> {
 
     @Override
     public int compareTo(Customer o) {
-        return Integer.compare(this.ID, o.getID());
+        String ID1 = this.getID();
+        String ID2 = o.getID();
+
+        return ID1.compareTo(ID2);
     }
 }

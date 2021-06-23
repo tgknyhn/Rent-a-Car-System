@@ -222,9 +222,6 @@ public class SalesManager implements User, Comparable<SalesManager> {
         // score & balance to 0 for first time.
         cus.setScore(0);
         cus.setBalance(0);
-        // need to create unique id.
-		cus.setID(-1);
-
 		/*
 		bilgilerini topladığımız cus, theCustomer listesine yeni obje olarak
 			eklenmeli. Customer listesini company'den almamız gerekiyor.
