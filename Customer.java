@@ -15,6 +15,7 @@ public class Customer implements User, Comparable<Customer> {
     private String name;
     private String lastname;
     private String address;
+    private String password;
     private String email;
     private String ID;
     private int phone;
@@ -45,18 +46,20 @@ public class Customer implements User, Comparable<Customer> {
      * @param name Name of the customer
      * @param surname Surname of the customer
      * @param address Address of the customer
+     * @param ID ID of the customer
      * @param phone Phone number of the customer
      * @param score Score of the customer
      */
-    public Customer(String name, String surname, String address, int phone, int score, int balance, boolean license) {
+    public Customer(String name, String surname, String address, String ID, String password) {
         createID();
         setName(name);
         setSurname(surname);
         setAddress(address);
-        setPhone(phone);
-        setScore(score);
-        setBalance(balance);
-        setLicense(license);
+        setPhone(0);
+        setScore(0);
+        setBalance(0);
+        setLicense(true);
+        setPassword(password);
     }
 
     /* [Getters] */
@@ -94,12 +97,12 @@ public class Customer implements User, Comparable<Customer> {
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override
     public void setPassword(String password) {
-
+        this.password = password;
     }
 
     /**
@@ -332,6 +335,7 @@ public class Customer implements User, Comparable<Customer> {
 
         return ID1.compareTo(ID2);
     }
+
     private void createID(){
         this.ID = Integer.toString(customer_ID + count++);
     }

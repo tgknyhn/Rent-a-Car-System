@@ -1,9 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class LoginUI extends JFrame implements ActionListener {
     private final String user;
@@ -11,6 +11,16 @@ public class LoginUI extends JFrame implements ActionListener {
     private JButton button_next;
 
     private final Company company;
+
+    JTextField field_ID;
+    JTextField field_branchID;
+    JTextField field_password;
+
+    JLabel text_ID;
+    JLabel text_branchID;
+    JLabel text_password;
+
+    String branchID, ID, password;
 
     public LoginUI(String user, Company company) {
         // Initializing the data fields
@@ -90,6 +100,10 @@ public class LoginUI extends JFrame implements ActionListener {
         JLabel text_branchID = new JLabel();
         JLabel text_password = new JLabel();
 
+        // Listeners
+        field_ID.addActionListener(e -> ID = field_ID.getText());
+        field_branchID.addActionListener(e -> branchID = field_branchID.getText());
+        field_password.addActionListener(e -> password = field_password.getText());
 
         // Component properties
         field_ID.setBounds(320, 20 , 100, 20);
@@ -108,26 +122,6 @@ public class LoginUI extends JFrame implements ActionListener {
         text_branchID.setBounds(235, 38, 100, 20);
         text_password.setBounds(235, 58, 100, 20);
 
-
-        // Listeners
-
-        field_ID.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                char letter = e.getKeyChar();
-
-                field_ID.setEditable(letter >= '0' && letter <= '9');
-            }
-        });
-
-        field_branchID.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                char letter = e.getKeyChar();
-
-                field_branchID.setEditable(letter >= '0' && letter <= '9');
-            }
-        });
 
 
         // Adding components to the JPanel
@@ -177,9 +171,84 @@ public class LoginUI extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println(e.getSource());
         if(e.getSource() == button_exit)
             System.exit(0);
-        else if(e.getSource() == button_next)
-            System.out.println("selam");
+        else if(e.getSource() == button_next) {
+            if(user.equals("Admin")) {
+                Admin admin = company.getAdmin();
+                if(admin.getID().equals(ID) && admin.getPassword().equals(password)) {
+                    dispose();
+                    // Admin gui
+                }
+                else
+                    System.out.println("Admin Login: Invalid ID or Password!");
+            }
+            else if(user.equals("Employee")) {
+                if(Integer.parseInt(ID) >= 10_000 && Integer.parseInt(ID) <= 20_000) {
+                    SkipList<SalesManager> employees = company.getSalesManagers();
+                    int size = employees.size();
+
+                    for(int i=0; i<size; i++) {
+                        if(employees.get(i).getID().equals(ID) && employees.get(i).getPassword().equals(password)) {
+                            dispose();
+                            // Sales Manager gui
+                        }
+                    }
+                }
+                else if(Integer.parseInt(ID) >= 20_000 && Integer.parseInt(ID) <= 30_000) {
+                    SkipList<Technician> employees = company.getTechnicians();
+                    int size = employees.size();
+
+                    for(int i=0; i<size; i++) {
+                        if(employees.get(i).getID().equals(ID) && employees.get(i).getPassword().equals(password)) {
+                            dispose();
+                            // Technician gui
+                        }
+                    }
+                }
+                else if(Integer.parseInt(ID) >= 30_000 && Integer.parseInt(ID) <= 40_000) {
+                    SkipList<TransportPersonnel> employees = company.getTransportPersonnels();
+                    int size = employees.size();
+
+                    for(int i=0; i<size; i++) {
+                        if(employees.get(i).getID().equals(ID) && employees.get(i).getPassword().equals(password)) {
+                            dispose();
+                            // Technician gui
+                        }
+                    }
+                }
+                else
+                    System.out.println("Employee Login: Invalid User");
+            }
+            else if(user.equals("Customer")) {
+                AVLTree<Customer> customers = company.getCustomers();
+                Customer customer;
+                boolean isValid = false;
+
+                Iterator<Customer> itr = customers.iterator();
+
+                while(itr.hasNext()) {
+                    customer = itr.next();
+
+                    System.out.println(customer.getID() + " digeri: " + ID);
+
+                    if(customer.getID().equals(ID) && customer.getPassword().equals(password))
+                        isValid = true;
+                }
+
+                if(isValid) {
+                    dispose();
+                    try {
+                        new CustomerUI(null, this.company);
+                    } catch (FileNotFoundException fileNotFoundException) {
+                        System.exit(0);
+                    }
+                }
+            }
+        }
     }
+
+
+
 }
