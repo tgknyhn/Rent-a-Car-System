@@ -23,8 +23,11 @@ public class CustomerUI extends JFrame implements ActionListener {
     private Map<String, Integer> provinceMap;
     private Map<Integer, String> provinceMapReverse;
 
-    public CustomerUI(BranchGraph graph) throws FileNotFoundException {
+    private final Company company;
+
+    public CustomerUI(BranchGraph graph, Company company) throws FileNotFoundException {
         // Initializing data fields
+        this.company = company;
         this.graph = graph;
         initProvinceMap();
 
@@ -271,7 +274,7 @@ public class CustomerUI extends JFrame implements ActionListener {
 
         if(source == button_back) {
             dispose();
-            new MenuUI();
+            new MenuUI(this.company);
         }
         else if(source == button_exit)
             System.exit(0);

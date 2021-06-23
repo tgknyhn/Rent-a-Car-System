@@ -2,6 +2,8 @@ import java.io.FileNotFoundException;
 
 public class MainUI {
     public static void main(String[] args) throws FileNotFoundException {
-        new MenuUI();
+        Company myCompany = new Company();
+
+        new MenuUI(myCompany);
     }
 }

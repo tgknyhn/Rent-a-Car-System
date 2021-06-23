@@ -9,7 +9,11 @@ public class MenuUI extends JFrame implements ActionListener {
     private JButton button_next;
     private String  currentUser = "Admin";
 
-    public MenuUI() {
+    private final Company company;
+
+    public MenuUI(Company company) {
+        // Initializing the company
+        this.company = company;
         // Adding components to the JFrame
         add(getGreeting());
         add(getUsers());
@@ -122,9 +126,8 @@ public class MenuUI extends JFrame implements ActionListener {
         else if(e.getSource() == button_exit)
             System.exit(0);
         else if(e.getSource() == button_next) {
-            if(currentUser.equals("Admin"))
             dispose();
-            new LoginUI(currentUser);
+            new LoginUI(currentUser, this.company);
         }
     }
 }

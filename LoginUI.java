@@ -10,9 +10,12 @@ public class LoginUI extends JFrame implements ActionListener {
     private JButton button_exit;
     private JButton button_next;
 
-    public LoginUI(String user) {
-        // Initializing the User
+    private final Company company;
+
+    public LoginUI(String user, Company company) {
+        // Initializing the data fields
         this.user = user;
+        this.company = company;
         // Adding components to the JFrame
         add(getGreeting());
         add(getUserInput());

@@ -9,9 +9,9 @@ public class Company {
 
     // Employee
     private AVLTree<Customer>     customers;
-    private SkipList<SalesManager>   	  salesManagers;
-    private SkipList<Technician>          technicians;
-    private SkipList<TransportPersonnel>  transportPersonnels;
+    private SkipList<SalesManager>   	 salesManagers;
+    private SkipList<Technician>         technicians;
+    private SkipList<TransportPersonnel> transportPersonnels;
 
     // Branches
     private ArrayList<RentalBranch> rentalBranches;
@@ -45,7 +45,6 @@ public class Company {
 			fr.close();
 					
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
@@ -55,5 +54,14 @@ public class Company {
     public Admin getAdmin() { return admin; }
 
     public ArrayList<Vehicle> getVehicles() { return vehicles; }
+
+	public AVLTree<Customer> getCustomers() { return customers; }
+
+	public SkipList<SalesManager> getSalesManagers() { return salesManagers; }
+
+	public SkipList<Technician> getTechnicians() { return technicians; }
+
+	public SkipList<TransportPersonnel> getTransportPersonnels() { return transportPersonnels; }
+
 
 }
