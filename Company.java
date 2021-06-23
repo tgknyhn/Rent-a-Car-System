@@ -63,5 +63,9 @@ public class Company {
 
 	public SkipList<TransportPersonnel> getTransportPersonnels() { return transportPersonnels; }
 
+	public ArrayList<RentalBranch> getRentalBranches(){ return rentalBranches; }
+
+	public ArrayList<ServiceBranch> getServiceBranch(){ return serviceBranch; }
+
 
 }

@@ -96,12 +96,12 @@ public class Admin implements User {
 		return true;
 	}
 
-	public boolean addRentalBranch(ArrayList<RentalBranch> rBranches, String branchName, int branchID) {
-		RentalBranch rb = new RentalBranch(branchName, branchID);
+	public boolean addRentalBranch(ArrayList<RentalBranch> rBranches, Branch rb) {
+
 		if(rBranches.contains(rb))
 			return false;
 
-		rBranches.add(rb);
+		rBranches.add((RentalBranch) rb);
 		return true;
 	}
 
@@ -109,14 +109,11 @@ public class Admin implements User {
 		return rBranches.remove(branch);
 	}
 
-	public boolean addServiceBranch(ArrayList<ServiceBranch> sBranches) {
-		ServiceBranch sb = new ServiceBranch();
-		System.out.println("Please type the name of the new service branch: ");
-		Scanner scan = new Scanner(System.in);
-		String name = scan.nextLine();
-		sb.setName(name);
-		sBranches.add(sb);
+	public boolean addServiceBranch(ArrayList<ServiceBranch> sBranches , Branch sb) {
+		if(sBranches.contains(sb))
+			return false;
 
+		sBranches.add((ServiceBranch) sb);
 		return true;
 	}
 

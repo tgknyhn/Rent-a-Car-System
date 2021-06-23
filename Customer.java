@@ -11,12 +11,12 @@ public class Customer implements User, Comparable<Customer> {
     private final int MIN_BALANCE = 0;
     // Customer information
     private final int customer_ID = 60000;
+    private static int count = 0;
     private String name;
     private String lastname;
     private String address;
     private String email;
     private String ID;
-    private static int count = 0;
     private int phone;
     private int score;
     private int balance;
@@ -56,7 +56,6 @@ public class Customer implements User, Comparable<Customer> {
         setPhone(phone);
         setScore(score);
         setBalance(balance);
-        createID();
         setLicense(license);
     }
 
