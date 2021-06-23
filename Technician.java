@@ -2,6 +2,8 @@ import java.util.ArrayList;
 
 public class Technician implements User , Comparable<Technician>{
 /**/
+	private final int technician_ID = 20000;
+	private static int count = 0;
 	private String name;
 	private String lastname;
 	private String ID;
@@ -11,7 +13,7 @@ public class Technician implements User , Comparable<Technician>{
     public Technician(){
         setName("empty");
 		setLastname("empty");
-		setID("empty");
+		createID();
         setEmail("empty");
         setPassword("empty");
     }
@@ -27,7 +29,7 @@ public class Technician implements User , Comparable<Technician>{
 	public Technician(String name, String lastname, String ID, String email, String password) {
 		setName(name);
 		setLastname(lastname);
-		setID(ID);
+		createID();
 		setEmail(email);
 		setPassword(password);
 	}
@@ -90,14 +92,6 @@ public class Technician implements User , Comparable<Technician>{
 		this.lastname = lastname;
 	}
 
-	 /**
-     * Changes ID of the transportation personnel
-     * @param ID
-     */
-    @Override
-	public void setID(String ID) {
-		this.ID = ID;
-	}
 
 	 /**
      * Changes email of the transportation personnel
@@ -180,5 +174,13 @@ public class Technician implements User , Comparable<Technician>{
 		String ID2 = o.getID();
 
 		return ID1.compareTo(ID2);
+	}
+
+	private void createID(){
+		if(count > 9999){
+			System.out.println("There is not enough space for a new Technician.");
+			System.exit(1);
+		}
+		ID = Integer.toString( technician_ID + count++);
 	}
 }

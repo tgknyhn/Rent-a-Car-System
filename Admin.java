@@ -5,7 +5,7 @@ public class Admin implements User {
 	private final int MAX_EMP_SIZE = 1000;
 	private String name;
 	private String lastname;
-	private String ID;
+	private String ID = "0";
 	private String email;
 	private String password;
 
@@ -13,7 +13,6 @@ public class Admin implements User {
 	public Admin(){
 		setName("empty");
 		setLastname("empty");
-		setID("empty");
 		setEmail("empty");
 		setPassword("empty");
 	}
@@ -29,7 +28,6 @@ public class Admin implements User {
 	public Admin(String name, String lastname, String ID, String email, String password) {
 		setName(name);
 		setLastname(lastname);
-		setID(ID);
 		setEmail(email);
 		setPassword(password);
 	}
@@ -52,11 +50,6 @@ public class Admin implements User {
 	@Override
 	public void setPassword(String password) {
 	this.password = password;
-	}
-
-	@Override
-	public void setID(String ID) {
-		this.ID = ID;
 	}
 
 	@Override
@@ -142,7 +135,6 @@ public class Admin implements User {
 		Scanner scan = new Scanner(System.in);
 		String name = scan.nextLine();
 		sm.setName(name);
-		sm.setID(createId('S', sManagers.size()));
 		sManagers.add(sm);
 
 		return true;
@@ -180,7 +172,6 @@ public class Admin implements User {
 		Scanner scan = new Scanner(System.in);
 		String name = scan.nextLine();
 		tp.setName(name);
-		tp.setID(createId('t', tPersonnel.size()));
 		tPersonnel.add(tp);
 
 		return true;
@@ -218,7 +209,6 @@ public class Admin implements User {
 		Scanner scan = new Scanner(System.in);
 		String name = scan.nextLine();
 		t.setName(name);
-		t.setID(createId('T', technicians.size()));
 		technicians.add(t);
 
 		return true;

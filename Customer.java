@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
@@ -9,11 +10,13 @@ public class Customer implements User, Comparable<Customer> {
     private final int MAX_BALANCE = 10000;
     private final int MIN_BALANCE = 0;
     // Customer information
+    private final int customer_ID = 60000;
     private String name;
     private String lastname;
     private String address;
     private String email;
     private String ID;
+    private static int count = 0;
     private int phone;
     private int score;
     private int balance;
@@ -30,7 +33,7 @@ public class Customer implements User, Comparable<Customer> {
         setName("empty");
         setSurname("empty");
         setAddress("empty");
-        setID("0");
+        createID();
         setPhone(0);
         setScore(0);
         setBalance(0);
@@ -44,16 +47,16 @@ public class Customer implements User, Comparable<Customer> {
      * @param address Address of the customer
      * @param phone Phone number of the customer
      * @param score Score of the customer
-     * @param ID ID of the customer
      */
-    public Customer(String name, String surname, String address, String ID, int phone, int score, int balance, boolean license) {
+    public Customer(String name, String surname, String address, int phone, int score, int balance, boolean license) {
+        createID();
         setName(name);
         setSurname(surname);
         setAddress(address);
         setPhone(phone);
         setScore(score);
         setBalance(balance);
-        setID(ID);
+        createID();
         setLicense(license);
     }
 
@@ -245,15 +248,14 @@ public class Customer implements User, Comparable<Customer> {
     /* [Renting Methods] */
 
     /**
-     * Prints out all vehicles to the terminal
+     * Returns all vehicles in order.
      * @param vehicles Vehicle list
      */
-    public void listAllVehicles(ArrayList<Vehicle> vehicles) {
+    public ArrayList<Vehicle> listAllVehicles(ArrayList<Vehicle> vehicles) {
         Vehicle_Sort vehicleSorter = new Vehicle_Sort();
         vehicleSorter.sort(vehicles);
-        
-        for(Vehicle vehicle : vehicles)
-            System.out.println(vehicle);
+
+        return vehicles;
     }
 
     /**
@@ -330,5 +332,8 @@ public class Customer implements User, Comparable<Customer> {
         String ID2 = o.getID();
 
         return ID1.compareTo(ID2);
+    }
+    private void createID(){
+        this.ID = Integer.toString(customer_ID + count++);
     }
 }

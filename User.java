@@ -1,8 +1,6 @@
 public interface User {
 
-
     String getID();
-    void setID(String ID);
 
     String getName();
     void setName(String name);

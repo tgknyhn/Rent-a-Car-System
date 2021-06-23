@@ -3,6 +3,8 @@ import java.util.Scanner;
 
 public class SalesManager implements User, Comparable<SalesManager> {
 
+	private final int salesManager_ID = 10000;
+	private static int count = 0;
 	private String name;
 	private String lastname;
 	private String ID;
@@ -20,7 +22,7 @@ public class SalesManager implements User, Comparable<SalesManager> {
     public SalesManager(){
         setName("-");
 		setLastname("-");
-		setID("-");
+		createId();
         setEmail("-");
         setPassword("-");
         setBranchID("-");
@@ -30,14 +32,13 @@ public class SalesManager implements User, Comparable<SalesManager> {
      * Initializes transportation personnel.
      * @param _name Name of the sales manager
      * @param _lastname Surname of the sales manager
-     * @param _ID ID of the sales manager
      * @param _email Email of the sales manager
      * @param _password Password of the sales manager
      */
-	public SalesManager(String _name, String _lastname, String _ID, String _email, String _password, String _branchID) {
+	public SalesManager(String _name, String _lastname, String _email, String _password, String _branchID) {
 		setName(_name);
 		setLastname(_lastname);
-		setID(_ID);
+		createId();
         setEmail(_email);
         setPassword(_password);
         setBranchID(_branchID);
@@ -99,14 +100,7 @@ public class SalesManager implements User, Comparable<SalesManager> {
 		this.lastname = _lastname;
 	}
 
-	/**
-     * Changes ID of the sales manager
-     * @param _ID
-     */
-    @Override
-	public void setID(String _ID) {
-		this.ID = _ID;
-	}
+
 
 	/**
      * Changes email of the sales manager
@@ -350,19 +344,12 @@ public class SalesManager implements User, Comparable<SalesManager> {
         return true;
     }
 
-	public String createId(char code, int size) {
-		String id = "";
-		if (code == 't') //To seperate T with TP.
-			id += "TP";
-		else
-			id += code;
-
-		for (int i = 1; i < 3; i++) { //This loop for add '0' to id if digit is small.
-			if (size+1 < Math.pow(10, 3-i))
-				id += "0";
+	public void createId() {
+		if(count > 9999){
+			System.out.println("There is not enough space for a new Sales Manager.");
+			System.exit(1);
 		}
-		id += Integer.toString(size+1);
-		return id;
+		ID = Integer.toString( salesManager_ID + count++);
 	}
 
 	@Override

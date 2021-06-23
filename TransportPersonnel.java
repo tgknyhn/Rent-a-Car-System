@@ -3,6 +3,8 @@ import java.util.Queue;
 
 public class TransportPersonnel implements User , Comparable<TransportPersonnel> {
 
+	private final int transport_ID = 30000;
+	private static int count = 0;
 	private String name;
 	private String lastname;
 	private String ID;
@@ -12,7 +14,7 @@ public class TransportPersonnel implements User , Comparable<TransportPersonnel>
     public TransportPersonnel(){
         setName("empty");
 		setLastname("empty");
-		setID("empty");
+		createID();
         setEmail("empty");
         setPassword("empty");
     }
@@ -21,14 +23,13 @@ public class TransportPersonnel implements User , Comparable<TransportPersonnel>
      * Initializes transportation personnel.
      * @param name Name of the transportation personnel
      * @param lastname Surname of the transportation personnel
-     * @param ID ID of the transportation personnel
      * @param email Email of the transportation personnel
      * @param password Password of the transportation personnel
      */
-	public TransportPersonnel(String name, String lastname, String ID, String email, String password) {
+	public TransportPersonnel(String name, String lastname, String email, String password) {
 		setName(name);
 		setLastname(lastname);
-		setID(ID);
+		createID();
 		setEmail(email);
 		setPassword(password);
 	}
@@ -89,15 +90,6 @@ public class TransportPersonnel implements User , Comparable<TransportPersonnel>
 	@Override
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
-	}
-
-	 /**
-     * Changes ID of the transportation personnel
-     * @param ID
-     */
-    @Override
-	public void setID(String ID) {
-		this.ID = ID;
 	}
 
 	 /**
@@ -166,6 +158,13 @@ public class TransportPersonnel implements User , Comparable<TransportPersonnel>
 		String ID2 = o.getID();
 
 		return ID1.compareTo(ID2);
+	}
+	private void createID(){
+		if(count > 9999){
+			System.out.println("There is not enough space for a new Transportation.");
+			System.exit(1);
+		}
+		ID = Integer.toString( transport_ID + count++);
 	}
 }
 
