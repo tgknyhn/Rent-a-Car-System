@@ -176,12 +176,8 @@ public class LoginUI extends JFrame implements ActionListener {
         else if(e.getSource() == button_next) {
             if(user.equals("Admin")) {
                 Admin admin = company.getAdmin();
-                System.out.println(admin.getID());
-                System.out.println(ID);
-                System.out.println(admin.getPassword());
-                System.out.println(password);
                 if(admin.getID().equals(ID) && admin.getPassword().equals(password)) {
-                    dispose();
+                    System.out.println("Admin successfully login to the system");
                     // Admin gui
                 }
                 else
