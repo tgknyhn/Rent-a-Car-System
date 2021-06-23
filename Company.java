@@ -8,10 +8,10 @@ public class Company {
     private Admin admin;
 
     // Employee
-    private BinarySearchTree<Customer>     customers;
-    private ArrayList<SalesManager>        salesManagers;
-    private ArrayList<Technician>          technicians;
-    private ArrayList<TransportPersonnel>  transportPersonnels;
+    private AVLTree<Customer>     customers;
+    private SkipList<SalesManager>   	  salesManagers;
+    private SkipList<Technician>          technicians;
+    private SkipList<TransportPersonnel>  transportPersonnels;
 
     // Branches
     private ArrayList<RentalBranch> rentalBranches;
@@ -21,6 +21,15 @@ public class Company {
     private ArrayList<Vehicle> vehicles;
     
     public Company() {
+    	customers = new AVLTree<>();
+    	salesManagers = new ArrayList<SalesManager>();
+    	technicians = new ArrayList<Technician>();
+    	transportPersonnels = new ArrayList<TransportPersonnel>();
+    	
+    	rentalBranches = new ArrayList<RentalBranch>();
+    	serviceBranch = new ArrayList<ServiceBranch>();
+    	
+    	vehicles = new ArrayList<Vehicle>();
     	try {
 			FileReader fr = new FileReader("vehicles.txt");
 			BufferedReader br = new BufferedReader(fr);
@@ -32,6 +41,7 @@ public class Company {
 				Vehicle temp = new Vehicle(tokens[0] , tokens[1] , Integer.parseInt(tokens[2]));
 				vehicles.add(temp);		
 			}	
+			System.out.println(vehicles);
 			br.close();
 			fr.close();
 					
