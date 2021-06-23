@@ -10,10 +10,6 @@ public class MainUI {
 
         //new MenuUI(myCompany);
 
-        Customer cust  = new Customer("Fatih","Gtu","x",1,1,1,true);
-        Customer cust1 = new Customer();
-        Customer cust2 = new Customer("Fat","Gtu","x",1,1,1,true);
-
         User u = new Technician();
         User u1 = new TransportPersonnel();
         User u2 = new SalesManager();
