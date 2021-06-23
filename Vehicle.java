@@ -70,18 +70,15 @@ public class Vehicle {
 
 
 
-	Vehicle(String brand, String model, String color, String description, int cost,int totalCost) {
+	Vehicle(String brand, String model, String color, int price) {
 		this.brand = brand;
 		this.model = model;
 		this.color = color;
-//		this.description = description;
-		this.price = cost;
+		this.price = price;
 		damage = 0;
 		discountPercent = 0;
 		available = true;
 		score = 0;
-		totalPriceOfCar=totalCost;
-//		scoreCount = 0;
 	}
 
     public Vehicle() {

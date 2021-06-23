@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Technician implements User {
+public class Technician implements User , Comparable<User>{
 /**/
 	private String name;
 	private String lastname;

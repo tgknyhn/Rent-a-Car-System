@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Queue;
 
-public class TransportPersonnel implements User {
+public class TransportPersonnel implements User , Comparable<User> {
 
 	private String name;
 	private String lastname;
