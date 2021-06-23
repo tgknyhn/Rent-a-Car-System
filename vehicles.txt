@@ -1,10 +1,10 @@
 BMW-i3-1000
 BMW-iX-1500
 BMW-i4-2000
-BMW-i4-M50-3000
+BMW-i4 M50-3000
 BMW-iX3-800
 Toyota-Corolla-500
-Toyota-C-HR-600
+Toyota-C HR-600
 Toyota-Camry-400
 Toyota-Yaris-900
 Toyota-Hatchback-300

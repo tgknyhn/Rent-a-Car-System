@@ -40,8 +40,7 @@ public class Company {
 				String tokens[] = line.split("-");
 				Vehicle temp = new Vehicle(tokens[0] , tokens[1] , Integer.parseInt(tokens[2]));
 				vehicles.add(temp);		
-			}	
-			System.out.println(vehicles);
+			}
 			br.close();
 			fr.close();
 					
