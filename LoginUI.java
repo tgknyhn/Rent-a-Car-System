@@ -12,15 +12,15 @@ public class LoginUI extends JFrame implements ActionListener {
 
     private final Company company;
 
-    JTextField field_ID;
+    JTextField field_Email;
     JTextField field_branchID;
     JTextField field_password;
 
-    JLabel text_ID;
+    JLabel text_Email;
     JLabel text_branchID;
     JLabel text_password;
 
-    String branchID, ID, password;
+    String branchID, Email, password;
 
     public LoginUI(String user, Company company) {
         // Initializing the data fields
@@ -92,33 +92,33 @@ public class LoginUI extends JFrame implements ActionListener {
         panel.setBounds(0, 200, 750, 100);
 
         // Initializing components
-        JTextField field_ID       = new JTextField();
+        JTextField field_Email       = new JTextField();
         JTextField field_branchID = new JTextField();
         JTextField field_password = new JTextField();
 
-        JLabel text_ID       = new JLabel();
+        JLabel text_Email    = new JLabel();
         JLabel text_branchID = new JLabel();
         JLabel text_password = new JLabel();
 
         // Listeners
-        field_ID.addActionListener(e -> ID = field_ID.getText());
+        field_Email.addActionListener(e -> Email = field_Email.getText());
         field_branchID.addActionListener(e -> branchID = field_branchID.getText());
         field_password.addActionListener(e -> password = field_password.getText());
 
         // Component properties
-        field_ID.setBounds(320, 20 , 100, 20);
+        field_Email.setBounds(320, 20 , 100, 20);
         field_branchID.setBounds(320, 40, 100, 20);
         field_password.setBounds(320, 60, 100, 20);
 
-        text_ID.setText("User ID:");
+        text_Email.setText("User Email:");
         text_branchID.setText("Branch ID:");
         text_password.setText("Password:");
 
-        text_ID.setFont(new Font(null, Font.BOLD, 15));
+        text_Email.setFont(new Font(null, Font.BOLD, 15));
         text_branchID.setFont(new Font(null, Font.BOLD, 15));
         text_password.setFont(new Font(null, Font.BOLD, 15));
 
-        text_ID.setBounds(250, 19, 100, 20);
+        text_Email.setBounds(250, 19, 100, 20);
         text_branchID.setBounds(235, 38, 100, 20);
         text_password.setBounds(235, 58, 100, 20);
 
@@ -126,7 +126,7 @@ public class LoginUI extends JFrame implements ActionListener {
 
         // Adding components to the JPanel
         if(user.equals("Admin") || user.equals("Customer")) {
-            panel.add(field_ID);          panel.add(text_ID);
+            panel.add(field_Email);          panel.add(text_Email);
             panel.add(field_password);    panel.add(text_password);
         }
         else {
@@ -176,7 +176,7 @@ public class LoginUI extends JFrame implements ActionListener {
         else if(e.getSource() == button_next) {
             if(user.equals("Admin")) {
                 Admin admin = company.getAdmin();
-                if(admin.getID().equals(ID) && admin.getPassword().equals(password)) {
+                if(admin.getEmail().equals(Email) && admin.getPassword().equals(password)) {
                     System.out.println("Admin successfully login to the system");
                     // Admin gui
                 }
@@ -184,34 +184,34 @@ public class LoginUI extends JFrame implements ActionListener {
                     System.out.println("Admin Login: Invalid ID or Password!");
             }
             else if(user.equals("Employee")) {
-                if(Integer.parseInt(ID) >= 10_000 && Integer.parseInt(ID) <= 20_000) {
+                if(Integer.parseInt(Email) >= 10_000 && Integer.parseInt(Email) <= 20_000) {
                     SkipList<SalesManager> employees = company.getSalesManagers();
                     int size = employees.size();
 
                     for(int i=0; i<size; i++) {
-                        if(employees.get(i).getID().equals(ID) && employees.get(i).getPassword().equals(password)) {
+                        if(employees.get(i).getEmail().equals(Email) && employees.get(i).getPassword().equals(password)) {
                             dispose();
                             // Sales Manager gui
                         }
                     }
                 }
-                else if(Integer.parseInt(ID) >= 20_000 && Integer.parseInt(ID) <= 30_000) {
+                else if(Integer.parseInt(Email) >= 20_000 && Integer.parseInt(Email) <= 30_000) {
                     SkipList<Technician> employees = company.getTechnicians();
                     int size = employees.size();
 
                     for(int i=0; i<size; i++) {
-                        if(employees.get(i).getID().equals(ID) && employees.get(i).getPassword().equals(password)) {
+                        if(employees.get(i).getEmail().equals(Email) && employees.get(i).getPassword().equals(password)) {
                             dispose();
                             // Technician gui
                         }
                     }
                 }
-                else if(Integer.parseInt(ID) >= 30_000 && Integer.parseInt(ID) <= 40_000) {
+                else if(Integer.parseInt(Email) >= 30_000 && Integer.parseInt(Email) <= 40_000) {
                     SkipList<TransportPersonnel> employees = company.getTransportPersonnels();
                     int size = employees.size();
 
                     for(int i=0; i<size; i++) {
-                        if(employees.get(i).getID().equals(ID) && employees.get(i).getPassword().equals(password)) {
+                        if(employees.get(i).getEmail().equals(Email) && employees.get(i).getPassword().equals(password)) {
                             dispose();
                             // Technician gui
                         }
@@ -223,6 +223,7 @@ public class LoginUI extends JFrame implements ActionListener {
             else if(user.equals("Customer")) {
 
                 AVLTree<Customer> customers = company.getCustomers();
+                System.out.println("bum"  + Email + " " + password);
                 Customer customer = null;
                 boolean isValid = false;
 
@@ -231,7 +232,7 @@ public class LoginUI extends JFrame implements ActionListener {
                 while(itr.hasNext()) {
                     customer = itr.next();
 
-                    if(customer.getID().equals(ID) && customer.getPassword().equals(password)) {
+                    if(customer.getEmail().equals(Email) && customer.getPassword().equals(password)) {
                         isValid = true;
                         break;
                     }

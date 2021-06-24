@@ -14,7 +14,6 @@ public class Customer implements User, Comparable<Customer> {
     private static int count = 0;
     private String name;
     private String lastname;
-    private String address;
     private String password;
     private String email;
     private String ID;
@@ -33,7 +32,7 @@ public class Customer implements User, Comparable<Customer> {
     public Customer() {
         setName("empty");
         setSurname("empty");
-        setAddress("empty");
+        setEmail("empty");
         createID();
         setPhone(0);
         setScore(0);
@@ -45,14 +44,12 @@ public class Customer implements User, Comparable<Customer> {
      * Takes all necessary data fields as parameter. Initializes Customer class.
      * @param name Name of the customer
      * @param surname Surname of the customer
-     * @param address Address of the customer
-     * @param ID ID of the customer
      */
-    public Customer(String name, String surname, String address, String password) {
+    public Customer(String name, String surname, String email, String password) {
         createID();
         setName(name);
         setSurname(surname);
-        setAddress(address);
+        setEmail(email);
         setPhone(0);
         setScore(0);
         setBalance(0);
@@ -85,12 +82,12 @@ public class Customer implements User, Comparable<Customer> {
 
     @Override
     public String getEmail() {
-        return null;
+        return email;
     }
 
     @Override
     public void setEmail(String email) {
-
+        this.email = email;
     }
 
     @Override
@@ -101,14 +98,6 @@ public class Customer implements User, Comparable<Customer> {
     @Override
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    /**
-     * Returns address of the customer
-     * @return Address of the customer
-     */
-    public String getAddress() {
-        return address;
     }
 
     /**
@@ -165,14 +154,6 @@ public class Customer implements User, Comparable<Customer> {
      */
     public void setSurname(String lastname) {
         this.lastname = lastname;
-    }
-
-    /**
-     * Changes address of the customer with given parameter
-     * @param address New address of the customer
-     */
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     /**

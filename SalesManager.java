@@ -222,7 +222,7 @@ public class SalesManager implements User, Comparable<SalesManager> {
 		System.out.println("Type the address of customer.");
 		scan = new Scanner(System.in);
 		String address = scan.nextLine();
-		cus.setAddress(address);
+		cus.setEmail(address);
 
 		System.out.println("Type the phone number of customer.");
 		scan = new Scanner(System.in);
@@ -301,7 +301,7 @@ public class SalesManager implements User, Comparable<SalesManager> {
         if(address == "-1"){
             // do nothing.
         }else{
-			aCustomer.setAddress(address);
+			aCustomer.setEmail(address);
         }
 
 		System.out.println("If the phone will change, type the new phone. Otherwise write -1.");
