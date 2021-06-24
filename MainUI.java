@@ -9,13 +9,14 @@ import java.util.Iterator;
 public class MainUI {
     public static void main(String[] args) throws IOException {
         // Initializing Admin
-        Admin admin = new Admin("admin", "nimda", "1000", "admin.com", "1234asdf");
+        Admin admin = new Admin("admin", "nimda", "1000", "admin.com", "1234asdf" );
         // Initializing the first employees
         Technician         u  = new Technician("tech", "nician_1", "tech_1.com", "1234");
         TransportPersonnel u1 = new TransportPersonnel("transport", "pers_1", "trans_1.com", "1234");
         SalesManager       u2 = new SalesManager("sales", "manager_1", "sales_1.com", "1234", "40000");
         // Initializing the company and adding admin to the company
         Company myCompany = new Company(admin);
+        admin.setComp(myCompany);
         // Adding employees to the company
         SkipList<Technician> technicians = myCompany.getTechnicians();
         SkipList<TransportPersonnel> transportPersonnels = myCompany.getTransportPersonnels();
@@ -69,13 +70,17 @@ public class MainUI {
         }*/
 
 
-        Iterator<Customer> iter = myCompany.getCustomers().iterator();
+        /*Iterator<Customer> iter = myCompany.getCustomers().iterator();
 
         while(iter.hasNext()){
             Customer temp;
             temp = iter.next();
             System.out.println(temp.getEmail() + " " + temp.getPassword() + " " + temp.getName());
-        }
+        }*/
+
+        Vehicle x = new Vehicle("Audi","Q2",2000);
+
+        admin.addVehicle(x);
 
     }
 }

@@ -1,13 +1,16 @@
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Admin implements User {
-	private final int MAX_EMP_SIZE = 1000;
+	private final int MAX_EMP_SIZE = 100000;
 	private String name;
 	private String lastname;
 	private String ID = "0";
 	private String email;
 	private String password;
+	private Company comp;
 
 
 	public Admin(){
@@ -15,6 +18,7 @@ public class Admin implements User {
 		setLastname("empty");
 		setEmail("empty");
 		setPassword("empty");
+		comp = null;
 	}
 
 	/**
@@ -25,7 +29,7 @@ public class Admin implements User {
 	 * @param email Email of the transportation personnel
 	 * @param password Password of the transportation personnel
 	 */
-	public Admin(String name, String lastname, String ID, String email, String password) {
+	public Admin(String name, String lastname, String ID, String email, String password ) {
 		setName(name);
 		setLastname(lastname);
 		setEmail(email);
@@ -78,21 +82,132 @@ public class Admin implements User {
 		return this.ID;
 	}
 
-
-	public void addVehicle(ServiceBranch sBranch, Vehicle vehicle) {
-		sBranch.addVehicle(vehicle);
+	public Company getComp() {
+		return comp;
 	}
 
-	public boolean removeVehicle(ServiceBranch sBranch) {
-		sBranch.listVehicles();
-		System.out.println("Please choose the vehicle that you want to remove");
-		Scanner scan = new Scanner(System.in);
-		int choice = scan.nextInt();
-		if (choice < 0 || choice > sBranch.getSize()) {
-			System.out.println("Invalid entry.");
-			return false;
+	public void setComp(Company comp) {
+		this.comp = comp;
+	}
+
+	/**
+	 * Adds all branches a new vehicle kind.
+	 * @param vehicle Vehicle to be added.
+	 */
+	public void addVehicle( Vehicle vehicle ) {
+
+		try {
+			FileReader fr = new FileReader("vehicles.txt");
+			BufferedReader br = new BufferedReader(fr);
+
+			String line;
+			while( (line = br.readLine()) != null){
+				String[] tokens = line.split("-");
+
+				if(tokens[0].equals(vehicle.getBrand()) && tokens[1].equals(vehicle.getModel())
+					&& Integer.parseInt(tokens[2]) == vehicle.getPrice()){
+
+					System.out.println("The vehicle is already in the company.");
+					br.close();
+					fr.close();
+					return;
+				}
+			}
+			fr.close();
+			br.close();
+
+			FileWriter fw = new FileWriter("vehicles.txt",true);
+			BufferedWriter bw = new BufferedWriter(fw);
+
+			StringBuilder sb = new StringBuilder();
+			sb.append("\n").append(vehicle.getBrand()).append("-").append(vehicle.getModel());
+			sb.append("-").append(vehicle.getPrice());
+
+			bw.write(sb.toString());
+
+			bw.close();
+			fr.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		sBranch.removeVehicle(choice);
+
+	}
+
+	/**
+	 * Removes a vehicle from the company.
+	 * @param v Vehicle to be removed.
+	 * @return Returns true if removing is succesful.
+	 */
+	public boolean removeVehicle(Vehicle v) {
+
+		try{
+			FileReader fr = new FileReader("vehicles.txt");
+			BufferedReader br = new BufferedReader(fr);
+
+			File f1 = new File("Temp.txt");
+			if(f1.exists()) {
+				f1.delete();
+			}
+
+			FileWriter fw = new FileWriter("Temp.txt",true);
+			BufferedWriter bw = new BufferedWriter(fw);
+
+			String line;
+
+			while( (line=br.readLine()) != null) {
+				if(!line.equals(v.getBrand() + "-" + v.getModel() + "-" + v.getPrice())){
+					bw.write(line);
+					bw.newLine();
+				}
+			}
+
+			bw.close();
+			br.close();
+			fr.close();
+			fw.close();
+
+			File f = new File("vehicles.txt");
+			f.delete();
+
+			fr = new FileReader("Temp.txt");
+			br = new BufferedReader(fr);
+
+			fw = new FileWriter("vehicles.txt",true);
+			bw = new BufferedWriter(fw);
+
+			/* This part of the code copies the lines from temp.txt to vehicles.txt.  */
+			int flag = 0;
+			while( (line=br.readLine()) != null) {
+				if(flag == 0){
+					bw.write(line);
+					flag = 2;
+				}
+				else {
+					bw.newLine();
+					bw.write(line);
+				}
+
+				if((line=br.readLine()) != null){
+					bw.newLine();
+					bw.write(line);
+				}
+
+			}
+			bw.close();
+			br.close();
+			fr.close();
+			fw.close();
+
+			f = new File("Temp.txt");
+			if(f.exists()) {
+				f.delete();
+			}
+
+			return true;
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		return true;
 	}
@@ -273,6 +388,8 @@ public class Admin implements User {
         id += Integer.toString(size+1);
         return id;
 	}
+
+
 }
 
 

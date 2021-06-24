@@ -25,7 +25,6 @@ Renault-Koleos-1000
 Renault-Taliant-400
 Audi-A3-1000
 Audi-A4-1500
-Audi-Q2-2000
 Audi-Q3-2500
 Audi-Q5-3000
 Volvo-XC90-1000
@@ -33,3 +32,4 @@ Volvo-XC60-1500
 Volvo-S90-1600
 Volvo-V90-1900
 Volvo-60-1100
+Audi-Q2-2000
