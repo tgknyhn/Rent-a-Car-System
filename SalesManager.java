@@ -182,6 +182,22 @@ public class SalesManager implements User, Comparable<SalesManager> {
 		/* Shows available vehicles with their priority(Priority Queue) */
 	}
 
+	/**
+	 * Adds an existing user to the company as a customer.
+	 * @param customers Customers in the company.
+	 * @param u Customer's itself.
+	 * @return True if the adding is succesful.
+	 */
+	public boolean addCustomer(AVLTree<Customer> customers , Customer u){
+
+		if(customers.size() == MAX_EMP_SIZE){
+			// need to change size&cap.
+			return false;
+		}
+		customers.add(u);
+		return true;
+
+	}
 	public boolean addCustomer(ArrayList<Customer> theCustomer) {
 		if (theCustomer.size() == MAX_EMP_SIZE) {
 			// need to change size&cap.

@@ -221,6 +221,7 @@ public class LoginUI extends JFrame implements ActionListener {
                     System.out.println("Employee Login: Invalid User");
             }
             else if(user.equals("Customer")) {
+
                 AVLTree<Customer> customers = company.getCustomers();
                 Customer customer = null;
                 boolean isValid = false;

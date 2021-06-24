@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class MainUI {
@@ -10,7 +11,7 @@ public class MainUI {
         // Initializing Admin
         Admin admin = new Admin("admin", "nimda", "1000", "admin.com", "1234asdf");
         // Initializing the first employees
-        Technician         u  = new Technician("tech", "nician_1", "1001", "tech_1.com", "1234");
+        Technician         u  = new Technician("tech", "nician_1", "tech_1.com", "1234");
         TransportPersonnel u1 = new TransportPersonnel("transport", "pers_1", "trans_1.com", "1234");
         SalesManager       u2 = new SalesManager("sales", "manager_1", "sales_1.com", "1234", "40000");
         // Initializing the company and adding admin to the company
@@ -22,6 +23,9 @@ public class MainUI {
         technicians.add(u);
         transportPersonnels.add(u1);
         salesManagers.add(u2);
+        // Adding one customer to the company.
+        Customer c = new Customer("a" , "a" , "a" , "a");
+        u2.addCustomer(myCompany.getCustomers(), c);
 
 
         FileReader fr = new FileReader("provinces.txt");

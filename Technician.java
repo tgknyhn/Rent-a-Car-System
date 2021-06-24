@@ -22,11 +22,10 @@ public class Technician implements User , Comparable<Technician>{
      * Initializes transportation personnel.
      * @param name Name of the transportation personnel
      * @param lastname Surname of the transportation personnel
-     * @param ID ID of the transportation personnel
      * @param email Email of the transportation personnel
      * @param password Password of the transportation personnel
      */
-	public Technician(String name, String lastname, String ID, String email, String password) {
+	public Technician(String name, String lastname, String email, String password) {
 		setName(name);
 		setLastname(lastname);
 		createID();

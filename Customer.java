@@ -47,10 +47,8 @@ public class Customer implements User, Comparable<Customer> {
      * @param surname Surname of the customer
      * @param address Address of the customer
      * @param ID ID of the customer
-     * @param phone Phone number of the customer
-     * @param score Score of the customer
      */
-    public Customer(String name, String surname, String address, String ID, String password) {
+    public Customer(String name, String surname, String address, String password) {
         createID();
         setName(name);
         setSurname(surname);

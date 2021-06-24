@@ -29,7 +29,7 @@ public class Company {
     	rentalBranches = new ArrayList<>();
     	serviceBranch  = new ArrayList<>();
 
-    	customers.add(new Customer("ahmet", "sese", "adres", "60001", "1234"));
+    	customers.add(new Customer("ahmet", "sese", "adres","1234"));
 
     	vehicles = new ArrayList<>();
     	try {
