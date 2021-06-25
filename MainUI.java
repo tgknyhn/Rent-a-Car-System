@@ -25,7 +25,7 @@ public class MainUI {
         transportPersonnels.add(u1);
         salesManagers.add(u2);
         // Adding one customer to the company.
-        Customer c = new Customer("a" , "a" , "a" , "a");
+        Customer c = new Customer("ali" , "ebe" , "ali@customer.com" , "12345");
         u2.addCustomer(myCompany.getCustomers(), c);
 
         new MenuUI(myCompany);

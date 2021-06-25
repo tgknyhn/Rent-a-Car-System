@@ -4,10 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 @SuppressWarnings("DuplicatedCode")
 public class CustomerUI extends JFrame implements ActionListener {
@@ -20,17 +17,20 @@ public class CustomerUI extends JFrame implements ActionListener {
     private JComboBox<String> comboBox_brands;
     private JComboBox<String> comboBox_branches;
 
-    private Customer customer;
     private BranchGraph graph;
+    private final Company company;
+    private final Customer customer;
+    private RentalBranch branch;
     private Map<String, Integer> provinceMap;
     private Map<Integer, String> provinceMapReverse;
 
-    private final Company company;
 
-    public CustomerUI(BranchGraph graph, Company company, Customer customer) throws FileNotFoundException {
+    public CustomerUI(Company company, Customer customer) throws FileNotFoundException {
         // Initializing data fields
+        this.graph = new BranchGraph(82, false);
+        graph = (BranchGraph) graph.createGraph(new File("provinces.txt"));
+        this.branch = company.getRentalBranches().get(0);
         this.company = company;
-        this.graph = graph;
         this.customer = customer;
         initProvinceMap();
 
@@ -293,8 +293,12 @@ public class CustomerUI extends JFrame implements ActionListener {
             new StatusUI(customer.getMyVehicle()).setAlwaysOnTop(true);
         }
         else if(source == button_returnCar) {
+            System.out.println("You sent your vehicle back to the branch");
             customer.returnBackToBranch(new RentalBranch("yey"));
             button_returnCar.setEnabled(false);
+        }
+        else if(source == comboBox_branches) {
+            branch = company.getRentalBranches().get(comboBox_branches.getSelectedIndex());
         }
     }
 
@@ -312,6 +316,12 @@ public class CustomerUI extends JFrame implements ActionListener {
             
             rBranch = company.getRentalBranches().get(branch_index);
             vehicles = rBranch.getVehicles();
+
+            System.out.println("****** Neighbors of " + rBranch.getBranchName() + " ******");
+            System.out.println("------------------------------------------------------");
+            Iterator<Edge> itr = graph.edgeIterator(branch_index);
+            while(itr.hasNext())
+                System.out.println(provinceMapReverse.get(itr.next().getDest()));
 
             for (Vehicle vehicle : vehicles)
                 if (vehicle.getBrand().equals(brand))

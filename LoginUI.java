@@ -275,7 +275,7 @@ public class LoginUI extends JFrame implements ActionListener {
                 if(isValid) {
                     dispose();
                     try {
-                        new CustomerUI(null, this.company, customer);
+                        new CustomerUI(this.company, customer);
                     } catch (FileNotFoundException fileNotFoundException) {
                         System.exit(0);
                     }
