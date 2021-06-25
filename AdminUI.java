@@ -26,6 +26,8 @@ public class AdminUI extends JFrame implements ActionListener {
 
     public AdminUI(Company comp) {
         this.company = comp;
+        admin = comp.getAdmin();
+        admin.setComp(comp);
         add(greetingMessage());
         add(buttons());
         setTitle("Admin Menu");

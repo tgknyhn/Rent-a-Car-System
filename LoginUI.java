@@ -178,7 +178,8 @@ public class LoginUI extends JFrame implements ActionListener {
                 Admin admin = company.getAdmin();
                 if(admin.getEmail().equals(Email) && admin.getPassword().equals(password)) {
                     System.out.println("Admin successfully login to the system");
-                    // Admin gui
+                    dispose();
+                    new AdminUI(company);
                 }
                 else
                     System.out.println("Admin Login: Invalid ID or Password!");
@@ -276,7 +277,7 @@ public class LoginUI extends JFrame implements ActionListener {
                 if(isValid) {
                     dispose();
                     try {
-                        new CustomerUI(null, this.company, customer);
+                        new CustomerUI( this.company, customer);
                     } catch (FileNotFoundException fileNotFoundException) {
                         System.exit(0);
                     }

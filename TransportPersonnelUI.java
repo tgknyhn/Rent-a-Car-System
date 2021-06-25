@@ -302,7 +302,7 @@ public class TransportPersonnelUI extends JFrame implements ActionListener {
             {
             	for(ServiceBranch b : services) {
             	
-            		if(b.getName().equals(province2))
+            		if(b.getBranchName().equals(province2))
             		{
             			b3 = b;
             		}
@@ -343,7 +343,7 @@ public class TransportPersonnelUI extends JFrame implements ActionListener {
             		}
             	}
             	for(ServiceBranch b : services) {
-            		if(b.getName().equals(province2))
+            		if(b.getBranchName().equals(province2))
             		{
             			b3 = b;
             			if(b3.getVehiclesInService() == null)

@@ -30,24 +30,6 @@ public class MainUI {
 
         new MenuUI(myCompany);
 
-        /*ArrayList<RentalBranch> rentalBranches = myCompany.getRentalBranches();
-
-        for(int i=0; i<rentalBranches.size(); i++) {
-            System.out.println(rentalBranches.get(i).getBranchName());
-        }*/
-
-
-        /*Iterator<Customer> iter = myCompany.getCustomers().iterator();
-
-        while(iter.hasNext()){
-            Customer temp;
-            temp = iter.next();
-            System.out.println(temp.getEmail() + " " + temp.getPassword() + " " + temp.getName());
-        }*/
-
-        Vehicle x = new Vehicle("Audi","Q2",2000);
-
-        admin.addVehicle(x);
 
     }
 }
