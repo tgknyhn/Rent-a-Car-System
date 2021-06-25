@@ -137,26 +137,26 @@ public class SalesManager implements User, Comparable<SalesManager> {
 
 	/**
      * Checks, is there any available specific vehicle in that specific rental branch or not.
-	 * @param company Check vehicle list from company
+	 * @param rBranch Check vehicle list from rentalBranch
      * @param theModel The specific vehicle model which asked by user.
 	 * @return Returns index of available vehicle in vehicles list otherwise returns -1
 	 */
-	public Integer isVehicleAvailable(Company company, String theModel) {
-		int size = company.getVehicles().size();
+	public Integer isVehicleAvailable(RentalBranch rBranch, String theModel) {
+		/*int size = rentalBranch.getVehicle().size();
 		
 		if(size == 0) {
 			System.out.println("There is no vehicles!");
 			return -1;
-		}
+		}*/
 
 		// company'deki vehicle listesinde tüm vehicellar burada tek tek check edilmedi.
-		/**for(int i = 0 ; i < size ; i++) {
-			Vehicle currentVehicle = company.getVehicles(i).get(i);
+		ArrayList<Vehicle> vehicles = rBranch.getVehicles();
+		for(int i = 0 ; i < vehicles.size() ; i++) {
 			
-			if(currentVehicle.getModel().equals(theModel) && currentVehicle.available() == true) {
+			if(vehicles.get(i).getModel().equals(theModel) && vehicles.get(i).isAvailable() == true) {
 				return i;
 			}
-		}*/
+		}
 		return -1;
 	}
 
