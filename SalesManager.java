@@ -27,7 +27,13 @@ public class SalesManager implements User, Comparable<SalesManager> {
         setPassword("-");
         setBranchID("-");
     }
-    
+    public SalesManager(String ID){
+        setName("empty");
+		setLastname("empty");
+		setID(ID);
+        setEmail("empty");
+        setPassword("empty");
+    }
     /**
      * Initializes transportation personnel.
      * @param _name Name of the sales manager
@@ -65,7 +71,10 @@ public class SalesManager implements User, Comparable<SalesManager> {
 	public String getID() {
 		return this.ID;
 	}
-
+    
+    public void setID(String ID) {
+		this.ID = ID;
+	}
     /**
      * @return Email of the sales manager
      */
