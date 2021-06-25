@@ -319,7 +319,7 @@ public class CustomerUI extends JFrame implements ActionListener {
 
             System.out.println("****** Neighbors of " + rBranch.getBranchName() + " ******");
             System.out.println("------------------------------------------------------");
-            Iterator<Edge> itr = graph.edgeIterator(branch_index);
+            Iterator<Edge> itr = graph.edgeIterator(branch_index+1);
             while(itr.hasNext())
                 System.out.println(provinceMapReverse.get(itr.next().getDest()));
 
@@ -445,8 +445,8 @@ public class CustomerUI extends JFrame implements ActionListener {
                 text.setBounds(0,0, 400, 100);
             }
             else {
-                text.setText("You rented \"" + vehicle.getBrand() + " | " + vehicle.getModel() + " | " + vehicle.getPrice() + "\"");
-                text.setBounds(0,0, 400, 100);
+                text.setText("You rented \"" + vehicle.getBrand() + " | " + vehicle.getModel() + " | " + vehicle.getPrice() + "\"" + " - Branch: " + branch.getBranchName());
+                text.setBounds(0,0, 1000, 100);
             }
 
 
