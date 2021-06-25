@@ -118,7 +118,7 @@ public class LoginUI extends JFrame implements ActionListener {
         text_branchID.setFont(new Font(null, Font.BOLD, 15));
         text_password.setFont(new Font(null, Font.BOLD, 15));
 
-        text_Email.setBounds(250, 19, 100, 20);
+        text_Email.setBounds(235, 19, 100, 20);
         text_branchID.setBounds(235, 38, 100, 20);
         text_password.setBounds(235, 58, 100, 20);
 
@@ -184,39 +184,73 @@ public class LoginUI extends JFrame implements ActionListener {
                     System.out.println("Admin Login: Invalid ID or Password!");
             }
             else if(user.equals("Employee")) {
-                if(Integer.parseInt(Email) >= 10_000 && Integer.parseInt(Email) <= 20_000) {
+                if(Integer.parseInt(branchID) >= 10000 && Integer.parseInt(branchID) < 20000) {
                     SkipList<SalesManager> employees = company.getSalesManagers();
-                    int size = employees.size();
-
-                    for(int i=0; i<size; i++) {
-                        if(employees.get(i).getEmail().equals(Email) && employees.get(i).getPassword().equals(password)) {
-                            dispose();
-                            // Sales Manager gui
-                        }
+                    
+                    System.out.println("Sales Manager MENU");
+                    /*SalesManager temp = new SalesManager(branchID), employee = null;
+                    boolean isValid = false;
+                    
+                    if(employees.find(temp) != null) {
+                        isValid=true;
+                        employee = employees.find(temp);
                     }
+                    if(isValid)
+                    {
+                    	dispose();
+                        try {
+                            new SalesManagerUI(null, this.company, employee);
+                        } catch (FileNotFoundException fileNotFoundException) {
+                            System.exit(0);
+                        }
+                    }*/
                 }
-                else if(Integer.parseInt(Email) >= 20_000 && Integer.parseInt(Email) <= 30_000) {
+                else if(Integer.parseInt(branchID) >= 20000 && Integer.parseInt(branchID) < 30000) {
                     SkipList<Technician> employees = company.getTechnicians();
-                    int size = employees.size();
-
-                    for(int i=0; i<size; i++) {
-                        if(employees.get(i).getEmail().equals(Email) && employees.get(i).getPassword().equals(password)) {
-                            dispose();
-                            // Technician gui
-                        }
+                    
+                    System.out.println("Technician MENU");
+                    /*Technician temp = new Technician(branchID), employee = null;
+                    boolean isValid = false;
+                    
+                    if(employees.find(temp) != null) {
+                        isValid=true;
+                        employee = employees.find(temp);
                     }
+                    if(isValid)
+                    {
+                    	dispose();
+                        try {
+                            new TechnicianUI(null, this.company, employee);
+                        } catch (FileNotFoundException fileNotFoundException) {
+                            System.exit(0);
+                        }
+                    }*/
                 }
-                else if(Integer.parseInt(Email) >= 30_000 && Integer.parseInt(Email) <= 40_000) {
+                else if(Integer.parseInt(branchID) >= 30000 && Integer.parseInt(branchID) <= 40000) {
                     SkipList<TransportPersonnel> employees = company.getTransportPersonnels();
-                    int size = employees.size();
-
-                    for(int i=0; i<size; i++) {
-                        if(employees.get(i).getEmail().equals(Email) && employees.get(i).getPassword().equals(password)) {
-                            dispose();
-                            // Technician gui
+                    
+                    System.out.println("Transport Personnel MENU");
+                    
+                    /*
+                    TransportPersonnel temp = new TransportPersonnel(branchID), employee = null;
+                    boolean isValid = false;
+                    
+                    if(employees.find(temp) != null) {
+                        isValid=true;
+                        employee = employees.find(temp);
+                    }
+                    if(isValid)
+                    {
+                    	dispose();
+                        try {
+                            new TransportPersonnelUI(null, this.company, employee);
+                        } catch (FileNotFoundException fileNotFoundException) {
+                            System.exit(0);
                         }
                     }
+                    */
                 }
+                
                 else
                     System.out.println("Employee Login: Invalid User");
             }
