@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 
 public class MainUI {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         // Initializing Admin
         Admin admin = new Admin("admin", "nimda", "1000", "admin.com", "1234asdf" );
         // Initializing the first employees
@@ -27,39 +27,6 @@ public class MainUI {
         // Adding one customer to the company.
         Customer c = new Customer("a" , "a" , "a" , "a");
         u2.addCustomer(myCompany.getCustomers(), c);
-
-
-        FileReader fr = new FileReader("provinces.txt");
-        BufferedReader br = new BufferedReader(fr);
-
-        String line;
-        while( (line = br.readLine()) != null){
-            line = br.readLine();
-            if(line.compareTo("Duzce") == 0){
-                Branch temp = new RentalBranch(line);
-                Branch temp2 = new ServiceBranch(line);
-                if(!admin.addServiceBranch(myCompany.getServiceBranch(), temp2)){
-                    System.out.println("The branch named " + temp2.getID() + " already exists");
-                }
-                if(!admin.addRentalBranch(myCompany.getRentalBranches() , temp)){
-                    System.out.println("The branch named " + temp.getID() + " already exists.");
-                }
-                break;
-            }
-
-            Branch temp = new RentalBranch(line);
-            Branch temp2 = new ServiceBranch(line);
-
-            if(!admin.addServiceBranch(myCompany.getServiceBranch(), temp2)){
-                System.out.println("The branch named " + temp2.getID() + " already exists");
-            }
-            if(!admin.addRentalBranch(myCompany.getRentalBranches() , temp)){
-                System.out.println("The branch named " + temp.getID() + " already exists.");
-            }
-        }
-
-        br.close();
-        fr.close();
 
         new MenuUI(myCompany);
 
