@@ -162,7 +162,7 @@ public class TransportPersonnel implements User , Comparable<TransportPersonnel>
 	 */
 	public boolean transportRentalToRental(RentalBranch fromRental, RentalBranch toRental, Vehicle vehicle) {
 		fromRental.getVehicles().remove(vehicle);
-		return toRental.getVehicles().remove(vehicle);
+		return toRental.getVehicles().add(vehicle);
 	}
 
 	@Override
