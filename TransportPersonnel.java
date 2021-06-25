@@ -18,6 +18,13 @@ public class TransportPersonnel implements User , Comparable<TransportPersonnel>
         setEmail("empty");
         setPassword("empty");
     }
+    public TransportPersonnel(String ID){
+        setName("empty");
+		setLastname("empty");
+		setID(ID);
+        setEmail("empty");
+        setPassword("empty");
+    }
     
     /**
      * Initializes transportation personnel.
@@ -56,6 +63,10 @@ public class TransportPersonnel implements User , Comparable<TransportPersonnel>
 	@Override
 	public String getID() {
 		return this.ID;
+	}
+	
+	public void setID(String ID) {
+		this.ID = ID;
 	}
 
     /**
@@ -118,6 +129,10 @@ public class TransportPersonnel implements User , Comparable<TransportPersonnel>
 	 * @return Returns true if transportation is successfull
 	 */
 	public boolean transportServiceToRental(ServiceBranch service, RentalBranch rental, Vehicle vehicle) {
+		if(!service.getVehiclesInService().contains(vehicle)) {
+			System.out.println("There is no such a vehicle to transport!");
+			return false;
+		}
 		if(vehicle.getDamage() > 0) {
 			System.out.println("Vehicle is still damaged!");
 			return false;
@@ -134,6 +149,10 @@ public class TransportPersonnel implements User , Comparable<TransportPersonnel>
 	 * @return Returns true if transportation is successfull
 	 */
 	public boolean transportRentalToService(RentalBranch rental, ServiceBranch service, Vehicle vehicle) {
+		if(!rental.getPriorityVehicles().contains(vehicle)) {
+			System.out.println("There is no such a vehicle to transport!");
+			return false;
+		}
 		if(vehicle.getDamage() == 0) {
 			System.out.println("Vehicle does not need maintenance!");
 			return false;
@@ -148,6 +167,10 @@ public class TransportPersonnel implements User , Comparable<TransportPersonnel>
 	 * @return Returns true if transportation is successfull
 	 */
 	public boolean transportRentalToRental(RentalBranch fromRental, RentalBranch toRental, Vehicle vehicle) {
+		if(!fromRental.getPriorityVehicles().contains(vehicle)) {
+			System.out.println("There is no such a vehicle to transport!");
+			return false;
+		}
 		fromRental.getPriorityVehicles().remove(vehicle);
 		return toRental.addWithPriority(vehicle);
 	}
