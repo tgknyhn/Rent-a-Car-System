@@ -94,9 +94,9 @@ public class Admin implements User {
 	 * Adds all branches a new vehicle kind.
 	 * @param vehicle Vehicle to be added.
 	 */
-	public void addVehicle( Vehicle vehicle ) {
+	public void addVehicle(RentalBranch branch,  Vehicle vehicle ) {
 
-		try {
+		/*try {
 			FileReader fr = new FileReader("vehicles.txt");
 			BufferedReader br = new BufferedReader(fr);
 
@@ -129,8 +129,8 @@ public class Admin implements User {
 			fr.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-
+		}*/
+		branch.getVehicles().add(vehicle);
 	}
 
 	/**
@@ -138,8 +138,8 @@ public class Admin implements User {
 	 * @param v Vehicle to be removed.
 	 * @return Returns true if removing is succesful.
 	 */
-	public boolean removeVehicle(Vehicle v) {
-
+	public boolean removeVehicle(RentalBranch rb, Vehicle v) {
+		rb.getVehicles().remove(v);
 		try{
 			FileReader fr = new FileReader("vehicles.txt");
 			BufferedReader br = new BufferedReader(fr);
@@ -218,7 +218,7 @@ public class Admin implements User {
 			return false;
 
 		rBranches.add((RentalBranch) rb);
-		return true;
+			return true;
 	}
 
 	public boolean removeRentalBranch(ArrayList<RentalBranch> rBranches, RentalBranch branch) {
@@ -237,114 +237,41 @@ public class Admin implements User {
 		return sBranches.remove(branch);
 	}
 
-	public boolean addSalesManager(ArrayList<SalesManager> sManagers) {
-		if (sManagers.size() == MAX_EMP_SIZE) {
-			System.out.println("You can not add more SalesManager.");
-			return false;
-		}
-
-		SalesManager sm = new SalesManager();
-		System.out.println("Please type the name of the new sales manager: ");
-		Scanner scan = new Scanner(System.in);
-		String name = scan.nextLine();
-		sm.setName(name);
-		sManagers.add(sm);
+	public boolean addSalesManager(SkipList<SalesManager> sManagers, SalesManager sManager) {
+		sManagers.add(sManager);
 
 		return true;
 	}	
 
-	public boolean removeSalesManager(ArrayList<SalesManager> sManagers) {
-		if (sManagers.size() == 0) {
-			System.out.println("There is no sales manager in the System.");
+	public boolean removeSalesManager(SkipList<SalesManager> sManagers, SalesManager sm) {
+		if (sManagers.remove(sm) == null)
 			return false;
-		}
-
-		int i;
-		for (i = 0; i < sManagers.size();i++) {
-			System.out.printf("%d. %s\n", i+1, sManagers.get(i).getName());
-		}
-		Scanner scan = new Scanner(System.in);
-		int choice = scan.nextInt();
-		if (choice < 0 || choice > sManagers.size()) {
-			System.out.println("Invalid entry.");
-			return false;
-		}
-		sManagers.remove(choice);
 
 		return true;
 	}
 
-	public boolean addTransportPersonnel(ArrayList<TransportPersonnel> tPersonnel) {
-		if (tPersonnel.size() == MAX_EMP_SIZE) {
-			System.out.println("You can not add more transportation personnel");
-			return false;
-		}
-
-		TransportPersonnel tp = new TransportPersonnel();
-		System.out.println("Please type the name of the new transportation personnel: ");
-		Scanner scan = new Scanner(System.in);
-		String name = scan.nextLine();
-		tp.setName(name);
+	public boolean addTransportPersonnel(SkipList<TransportPersonnel> tPersonnel, TransportPersonnel tp) {
 		tPersonnel.add(tp);
 
 		return true;
 	}
 
-	public boolean removeTransportPersonnel(ArrayList<TransportPersonnel> tPersonnel) {
-		if (tPersonnel.size() == 0) {
-			System.out.println("There is no transport personnel in the System.");
-			return false;
-		}
+	public boolean removeTransportPersonnel(SkipList<TransportPersonnel> tPersonnel, TransportPersonnel tp) {
 
-		int i;
-		for (i = 0; i < tPersonnel.size();i++) {
-			System.out.printf("%d. %s\n", i+1, tPersonnel.get(i).getName());
-		}
-		Scanner scan = new Scanner(System.in);
-		int choice = scan.nextInt();
-		if (choice < 0 || choice > tPersonnel.size()) {
-			System.out.println("Invalid entry.");
+		if (tPersonnel.remove(tp) == null)
 			return false;
-		}
-		tPersonnel.remove(choice);
+		return true;
+	}
+
+	public boolean addTechnician(SkipList<Technician> technicians, Technician tech) {
+		technicians.add(tech);
 
 		return true;
 	}
 
-	public boolean addTechnician(ArrayList<Technician> technicians) {
-		if (technicians.size() == MAX_EMP_SIZE) {
-			System.out.println("You can not add more technician.");
+	public boolean removeTechnician(SkipList<Technician> technicians, Technician tech) {
+		if (technicians.remove(tech) == null)
 			return false;
-		}
-
-		Technician t = new Technician();
-		System.out.println("Please type the name of the new sales manager: ");
-		Scanner scan = new Scanner(System.in);
-		String name = scan.nextLine();
-		t.setName(name);
-		technicians.add(t);
-
-		return true;
-	}
-
-	public boolean removeTechnician(ArrayList<Technician> technicians) {
-		if (technicians.size() == 0) {
-			System.out.println("There is no technician in the System.");
-			return false;
-		}
-
-		int i;
-		for (i = 0; i < technicians.size();i++) {
-			System.out.printf("%d. %s\n", i+1, technicians.get(i).getName());
-		}
-		Scanner scan = new Scanner(System.in);
-		int choice = scan.nextInt();
-		if (choice < 0 || choice > technicians.size()) {
-			System.out.println("Invalid entry.");
-			return false;
-		}
-		technicians.remove(choice);
-
 		return true;
 	}
 
