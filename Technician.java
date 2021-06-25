@@ -17,7 +17,13 @@ public class Technician implements User , Comparable<Technician>{
         setEmail("empty");
         setPassword("empty");
     }
-    
+    public Technician(String ID){
+        setName("empty");
+		setLastname("empty");
+		setID(ID);
+        setEmail("empty");
+        setPassword("empty");
+    }
     /**
      * Initializes transportation personnel.
      * @param name Name of the transportation personnel
@@ -48,7 +54,9 @@ public class Technician implements User , Comparable<Technician>{
 	public String getLastname() {
 		return this.lastname;
 	}
-
+	public void setID(String ID) {
+		this.ID = ID;
+	}
 	/**
 	 * @return ID of the transportation personnel
 	 */
