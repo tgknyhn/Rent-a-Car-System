@@ -301,21 +301,31 @@ public class TransportPersonnelUI extends JFrame implements ActionListener {
             if(type1.equals("Rental") && type2.equals("Service"))
             {
             	for(ServiceBranch b : services) {
-            		if(b.getName()== province2)
+            	
+            		if(b.getName().equals(province2))
             		{
             			b3 = b;
             		}
             	}
             	for(RentalBranch b : rentals) {
-            		if(b.getBranchName() == province1)
+            		if(b.getBranchName().equals(province1))
             		{
             			b1 = b;
         			   for (Vehicle vehicle : b1.getVehicles())
         			   {
         				   if (vehicle.getBrand().equals(brand))
 	       	                {
+        					   
 	       	                	selectedVehicles.addItem(vehicle.getBrand() + " | " + vehicle.getModel() + " | " + vehicle.getPrice());
-	       	                	employee.transportRentalToService(b1, b3, vehicle);
+	       	                	if(employee.transportRentalToService(b1, b3, vehicle))
+	       	                	{
+ 	       	                		System.out.println("Vehicle is transported");
+ 	       	                	}
+ 	       	                	else
+ 	       	                	{
+ 	       	                		System.out.println("Vehicle couldn't transported!");
+ 	       	                	}
+	       	                	break;
 	       	                }   
         			   }
         	                   
@@ -324,24 +334,38 @@ public class TransportPersonnelUI extends JFrame implements ActionListener {
             	
             	
             }
-            else if(type2.equals("Rental") && type1.equals("Service"))
+            else if(type1.equals("Service") && type2.equals("Rental") )
             {
             	for(RentalBranch b : rentals) {
-            		if(b.getBranchName() == province1)
+            		if(b.getBranchName().equals(province1))
             		{
             			b1 = b;       
             		}
             	}
             	for(ServiceBranch b : services) {
-            		if(b.getName()== province2)
+            		if(b.getName().equals(province2))
             		{
             			b3 = b;
-            			for (Vehicle vehicle : b1.getVehicles())
-         			   {
+            			if(b3.getVehiclesInService() == null)
+            			{
+            				System.out.println("There is no vehicle in the service!");
+            				break;
+            			}
+            				
+            			for (Vehicle vehicle : b3.getVehiclesInService())
+         			   	{
          				   if (vehicle.getBrand().equals(brand))
  	       	                {
  	       	                	selectedVehicles.addItem(vehicle.getBrand() + " | " + vehicle.getModel() + " | " + vehicle.getPrice());
- 	       	                	employee.transportServiceToRental(b3, b1, vehicle);
+ 	       	                	if(employee.transportServiceToRental(b3, b1, vehicle))
+ 	       	                	{
+	       	                		System.out.println("Vehicle is transported");
+	       	                	}
+	       	                	else
+	       	                	{
+	       	                		System.out.println("Vehicle couldn't transported!");
+	       	                	}
+ 	       	                	break;
  	       	                }   
          			   }
             		}
@@ -352,13 +376,13 @@ public class TransportPersonnelUI extends JFrame implements ActionListener {
             else
             {
             	for(RentalBranch b : rentals) {
-            		if(b.getBranchName() == province1)
+            		if(b.getBranchName().equals(province1))
             		{
             			b1 = b;       
             		}
             	}
             	for(RentalBranch b : rentals) {
-            		if(b.getBranchName()== province2)
+            		if(b.getBranchName().equals(province2))
             		{
             			b2 = b;
             			for (Vehicle vehicle : b2.getVehicles())
@@ -366,7 +390,15 @@ public class TransportPersonnelUI extends JFrame implements ActionListener {
          				   if (vehicle.getBrand().equals(brand))
  	       	                {
  	       	                	selectedVehicles.addItem(vehicle.getBrand() + " | " + vehicle.getModel() + " | " + vehicle.getPrice());
- 	       	                	employee.transportRentalToRental(b2, b1, vehicle);
+ 	       	                	if(employee.transportRentalToRental(b2, b1, vehicle))
+ 	       	                	{
+ 	       	                		System.out.println("Vehicle is transported");
+ 	       	                	}
+ 	       	                	else
+ 	       	                	{
+ 	       	                		System.out.println("Vehicle couldn't transported!");
+ 	       	                	}
+ 	       	                	break;
  	       	                }   
          			   }	
             		}
