@@ -51,5 +51,7 @@ public class ServiceBranch extends Branch {
         this.ID = Integer.toString( branch_ID + count++);
     }
 
-
+    public String getBranchName() {
+        return this.branchName;
+    }
 }
