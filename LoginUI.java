@@ -231,7 +231,7 @@ public class LoginUI extends JFrame implements ActionListener {
                     
                     System.out.println("Transport Personnel MENU");
                     
-                    /*
+                    
                     TransportPersonnel temp = new TransportPersonnel(branchID), employee = null;
                     boolean isValid = false;
                     
@@ -248,7 +248,8 @@ public class LoginUI extends JFrame implements ActionListener {
                             System.exit(0);
                         }
                     }
-                    */
+                    else
+                        System.out.println("Employee Login: Invalid User");
                 }
                 
                 else
@@ -275,7 +276,7 @@ public class LoginUI extends JFrame implements ActionListener {
                 if(isValid) {
                     dispose();
                     try {
-                        new CustomerUI(this.company, customer);
+                        new CustomerUI(null, this.company, customer);
                     } catch (FileNotFoundException fileNotFoundException) {
                         System.exit(0);
                     }
