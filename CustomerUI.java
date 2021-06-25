@@ -287,7 +287,7 @@ public class CustomerUI extends JFrame implements ActionListener {
         else if(source == button_exit)
             System.exit(0);
         else if(source == button_search) {
-            new SearchUI((String)comboBox_brands.getSelectedItem()).setAlwaysOnTop(true);
+            new SearchUI(comboBox_branches.getSelectedIndex() ,(String)comboBox_brands.getSelectedItem()).setAlwaysOnTop(true);
         }
         else if(source == button_vehicleStat) {
             new StatusUI(customer.getMyVehicle()).setAlwaysOnTop(true);
@@ -302,14 +302,16 @@ public class CustomerUI extends JFrame implements ActionListener {
     private class SearchUI extends JFrame implements ActionListener {
         private JComboBox<String> selectedVehicles;
         private ArrayList<Vehicle> vehicles;
+        private RentalBranch rBranch;
 
         private JButton button_exit;
         private JButton button_rent;
 
-        public SearchUI(String brand){
+        public SearchUI(int branch_index, String brand){
             selectedVehicles = new JComboBox<>();
-
-            vehicles = company.getVehicles();
+            
+            rBranch = company.getRentalBranches().get(branch_index);
+            vehicles = rBranch.getVehicles();
 
             for (Vehicle vehicle : vehicles)
                 if (vehicle.getBrand().equals(brand))
@@ -390,18 +392,35 @@ public class CustomerUI extends JFrame implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            boolean found = false;
             if(e.getSource() == this.button_exit)
                 dispose();
             else if(e.getSource() == this.button_rent) {
                 String currVehicle = selectedVehicles.getSelectedItem().toString();
 
-                for(int i=0; i<vehicles.size(); i++)
+                for(int i=0; i<vehicles.size(); i++) {
                     if(currVehicle.contains(vehicles.get(i).getModel())) {
-                        customer.rentRequest(vehicles.get(i), new SalesManager());
-                        button_returnCar.setEnabled(true);
+                        if (customer.rentRequest(vehicles.get(i), new SalesManager())) {
+                            button_returnCar.setEnabled(true);
+                            vehicles.remove(i);
+                            found = true;
+                            break;
+                        }
                     }
 
+                }
+                if (!found) {
+                    File file = new File("provinces.txt");
+                    try {
+                        graph.createGraph(file);
+                    } catch (Exception FileNotFoundException) {
+                        System.exit(0);
+                    }
+                    //Check adjacent provinces.
+                }
+                
             }
+
         }
     }
 
